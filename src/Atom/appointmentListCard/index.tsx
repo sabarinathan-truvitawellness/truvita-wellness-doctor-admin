@@ -10,7 +10,7 @@ import {
   Video,
 } from "../../utils/common/svgIcons";
 import { Button } from "../button";
-import doctorDummyImage from '../../Assets/images/header/dummy-doctor-profile-2.png';
+import doctorDummyImage from '../../Assets/images/header/profile-image-avatar.png';
 
 interface InputProps {
   doctorName: string;
@@ -36,15 +36,6 @@ export const AppointmentListCard: React.FC<InputProps> = ({
   return (
     <div className="appointment-list-container">
       <div className="apointment-warpper">
-        <div className="list-col-1">
-          <div className="col-1-wrapper">
-            <div className="col-1-icon-wrapper">
-          <ClockTimer />
-          </div>
-
-          <p>in {startTime} Hr</p>
-          </div>
-        </div>
         <div className="list-col-2">
           <div className="col-2-wrapper">
             <img src={doctorDummyImage} alt="Doctor" />

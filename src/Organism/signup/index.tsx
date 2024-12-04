@@ -114,17 +114,6 @@ export const Signup = () => {
   });
   // Validation functions
   const validateFirstName = (value: string) => {
-    // const trimmedValue = value.trim();
-    // console.log("puou",trimmedValue)
-    // setError({
-    //   ...error,
-    //   firstName:
-    //     value === ""
-    //       ? "Enter Your Name"
-    //       : !value.match(REGEX_CONSTANT.ONLY_CHARACTERS)
-    //       ? "Enter Valid Name"
-    //       : "",
-    // });
 
     const validation = {
       firstName:
@@ -140,15 +129,6 @@ export const Signup = () => {
 
   const validateLastName = (value: string) => {
     const trimmedValue = value.trim();
-    // setError({
-    //   ...error,
-    //   lastName:
-    //     trimmedValue === ""
-    //       ? "Enter Your Last Name"
-    //       : !trimmedValue.match(REGEX_CONSTANT.ONLY_CHARACTERS)
-    //       ? "Enter Valid Last Name"
-    //       : "",
-    // });
     const validation = {
       lastName:
         trimmedValue === ""

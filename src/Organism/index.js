@@ -12,3 +12,11 @@
     export * from './ticketChat';
     export * from './prescription';
     export * from './prescriptionOverView'
+    export * from './patientsRecordList';
+    export * from './patientRecordOverview';
+    export * from './earningWallet';
+    export * from './appointmentRequest';
+    export * from './appointmentOverview';
+    export * from './doctorOnBoardingProgress';
+    export * from './doctorVerificationLanding';
+    export * from './doctorOnboardingForm';

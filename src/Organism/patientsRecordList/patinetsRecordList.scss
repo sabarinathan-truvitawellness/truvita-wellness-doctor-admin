@@ -1,0 +1,166 @@
+.patients-record-list-container {
+    padding: 20px;
+  
+    .patients-record-list-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 70vh;
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+  
+      .patients-short-card-container {
+        background-color: #fff;
+        border-radius: 24px;
+        padding: 15px;
+        width: 100%; /* Ensures all cards are of equal width */
+        flex: 1; /* Ensures cards grow equally */
+  
+        .patients-card-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          .patients-info {
+            display: flex;
+            align-items: center;
+            
+             flex: 1;
+            .patients-image {
+              margin-right: 20px;
+  
+              img {
+                min-width: 50px;
+                min-height: 50px;
+                width: 75px;
+                height: 75px;
+                border-radius: 50%;
+              }
+            }
+  
+            .patient-info-list {
+              text-align: left;
+              line-height: 30px;
+  
+              .patient-name {
+                color: #232c2b;
+                font-family: Manrope;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 25px;
+              }
+  
+              .patient-age-gender {
+                color: rgba(35, 44, 43, 0.5);
+                font-family: Manrope;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 25px;
+              }
+  
+              .patient-location {
+                color: rgba(35, 44, 43, 0.5);
+                font-family: Manrope;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                line-height: 25px;
+  
+                svg {
+                  margin-right: 5px;
+                }
+              }
+            }
+          }
+  
+          .patients-symptoms {
+            color: #0fc0ed;
+            font-family: Manrope;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-align: center;
+            flex: 0.5;
+          }
+  
+          .consultation-location {
+            color: rgba(35, 44, 43, 0.5);
+            font-family: Manrope;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-align: center;
+            flex: 0.5;
+          }
+  
+          .appointment-timing {
+            color: #232c2b;
+            font-family: Manrope;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 25px;
+            flex: 1;
+  
+            h3 {
+              color: rgba(35, 44, 43, 0.5);
+              font-family: Manrope;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 25px;
+            }
+  
+            &.consultation-location,
+            &.appointment-timing {
+              text-align: center;
+            }
+          }
+  
+          .icon-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            flex-wrap: wrap; 
+            flex: 1;
+  
+            .prescription-btn,
+            .download-btn {
+              cursor: pointer;
+              color: #007bff;
+              border: 1px solid rgb(212, 212, 212);
+              border-radius: 50%;
+              padding: 12px;
+            }
+  
+            .view-details-btn {
+              .view-btn {
+                padding: 9px 10px;
+                border-radius: 24px;
+                background: #0fc0ed;
+                color: white;
+                border: none;
+                cursor: pointer;
+  
+                &:hover {
+                  background-color: #0056b3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

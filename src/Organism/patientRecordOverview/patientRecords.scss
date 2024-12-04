@@ -1,0 +1,390 @@
+.patient-records-overview-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+
+  .patient-record-overview-wrapper {
+    display: flex;
+    gap: 20px;
+
+    .patient-list-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .patient-short-card {
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+
+        .patient-shor-card-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          .image-wrapper img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
+
+          .patient-info-content {
+            p {
+              margin: 0;
+              &:first-child {
+                font-weight: bold;
+              }
+              &:last-child {
+                color: #888;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .patient-overview-container {
+      flex: 3;
+
+      .patient-overview-wrapper {
+        display: flex;
+        gap: 20px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 26px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        .patient-overview-info-content {
+          border: 1px solid rgb(202, 202, 202);
+          border-radius: 24px;
+          padding: 24px;
+          .info-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .image-wrapper img {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+            }
+
+            .patient-personal-info p {
+              margin: 0;
+              text-align: center;
+              &:first-child {
+                padding-top: 12px;
+                font-weight: bold;
+              }
+              &:last-child {
+                color: #888;
+              }
+            }
+          }
+          .tier-type-wrapper {
+            margin-top: 8px;
+            margin-bottom: 20px;
+          }
+          .tier-type-wrapper p {
+            padding: 8px 20px;
+            border-radius: 24px;
+            background: rgba(15, 192, 237, 0.12);
+            display: flex;
+            justify-content: center;
+          }
+
+          .icon-wrapper-container {
+            display: flex;
+            gap: 10px;
+
+            .icon-wrapper {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 40px;
+              height: 40px;
+              background: #f1f1f1;
+              border-radius: 50%;
+              cursor: pointer;
+
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+
+        .patient-health-info-container {
+          flex: 1;
+          margin-top: 20px;
+
+          .title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+
+            p {
+              margin: 0;
+              font-weight: bold;
+            }
+
+            a {
+              color: #007bff;
+              text-decoration: none;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+
+          .health-monitor-info-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+
+            .health-card {
+              border: 1px solid rgb(195, 192, 192);
+              border-radius: 24px;
+              padding: 20px;
+              .title-section {
+                display: flex;
+              }
+              .icon-wrapper {
+                background: rgba(15, 192, 237, 0.12);
+                padding: 8px;
+                border-radius: 24px;
+              }
+              p {
+                margin-top: 10px;
+                font-family: Manrope;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+              }
+            }
+
+            .heart-rate-card,
+            .blood-pressure-card,
+            .temprature-card,
+            .oxygen-level-card {
+              flex: 1;
+              background: #f9f9f9;
+              padding: 15px;
+              border-radius: 10px;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+              .heart-rate-card-wrapper,
+              .blood-pressure-card-wrapper,
+              .temprature-card-wrapper,
+              .oxygen-level-card-wrapper {
+                .row-1 {
+                  display: flex;
+                  align-items: center;
+                  gap: 5px;
+
+                  svg {
+                    width: 20px;
+                    height: 20px;
+                  }
+                  span {
+                    font-weight: bold;
+                  }
+                }
+                .row-2 {
+                  margin-top: 10px;
+                  font-size: 18px;
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .patient-chief-data-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        gap: 20px;
+
+        .patient-recent-appointments-cards,
+        .pill-remainder-info-cards,
+        .prescription-info-cards {
+          padding: 20px;
+          flex: 1;
+          margin-bottom: 20px;
+
+          p {
+            margin: 0 0 10px 0;
+            color: rgba(35, 44, 43, 0.5);
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+        }
+
+        .patient-recent-appointments-cards {
+          border-radius: 24px;
+          background: rgba(35, 44, 43, 0.04);
+          .appointment-short-card {
+            background-color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 24px;
+
+            .appointment-short-card-wrapper {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              .image-wrapper img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+              }
+
+              .doctor-name p {
+                margin: 0;
+                color: #232c2b;
+                font-family: Manrope;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+              }
+
+              .overview-btn {
+                margin-left: auto;
+                cursor: pointer;
+                svg {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+
+        .pill-remainder-info-cards {
+          border-radius: 24px;
+          background: rgba(35, 44, 43, 0.04);
+          .pill-remainder-card-container {
+            margin-top: 10px;
+
+            .pill-card-wrapper {
+              background-color: #fff;
+              padding: 10px;
+              border-radius: 24px;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              .icon-wrapper {
+                background: #f1f1f1;
+                padding: 10px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+
+              .pill-info p {
+                margin: 0;
+
+                &:first-child {
+                  color: #232c2b;
+                  font-family: Manrope;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: normal;
+                }
+
+                &:last-child {
+                  color: rgba(35, 44, 43, 0.5);
+                  font-family: Manrope;
+                  font-size: 12px;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: normal;
+                }
+              }
+            }
+          }
+        }
+
+        .prescription-info-cards {
+          border-radius: 24px;
+          background: rgba(35, 44, 43, 0.04);
+          .prescription-card-container {
+            margin-top: 10px;
+
+            .prescription-card-wrapper {
+              padding: 10px;
+              border-radius: 24px;
+              background-color: #fff;
+              display: flex;
+              align-items: center;
+              gap: 15px;
+
+              .image-wrapper img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+              }
+
+              .doctor-name {
+                p {
+                  margin: 0;
+
+                  &:first-child {
+                    color: #232c2b;
+                    font-family: Manrope;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                  }
+
+                  &:nth-child(2) {
+                    color: rgba(35, 44, 43, 0.5);
+                    font-family: Manrope;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                  }
+
+                  &:last-child {
+                    color: rgba(35, 44, 43, 0.5);
+                    font-family: Manrope;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

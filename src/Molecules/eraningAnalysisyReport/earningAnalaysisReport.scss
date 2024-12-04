@@ -1,0 +1,47 @@
+.earning-analysis-graph-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    .earning-analysis-graph-wrapper {
+      width: 100%;
+      border-radius: 10px;
+  
+      .graph-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+  
+        p {
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+        }
+  
+        .custom-select {
+        width: auto;
+        }
+      }
+  
+      .line-chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .select-container{
+        margin: 0;
+      }
+
+      .MuiChartsAxis-tick {
+        stroke: none !important;
+      }
+      .MuiChartsAxis-line {
+        stroke: none !important;
+      }
+    }
+
+  }
+  

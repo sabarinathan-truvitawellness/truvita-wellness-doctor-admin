@@ -1,0 +1,119 @@
+.earning-wallet-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #f9f9f9;
+  
+    .earning-wallet-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  
+      .earning-wallet-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+  
+        .wallet-cards-container {
+          display: flex;
+          flex: 1;
+          gap: 20px;
+  
+          .wallet-card-wrapper {
+            width: 100%;
+            padding: 20px;
+            border-radius: 24px;
+            background: #ffffff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+  
+            &:hover {
+              transform: translateY(-5px);
+              box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            }
+  
+            .wallet-card-row-1 {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+  
+              .icon-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background-color: #eff6ff;
+              }
+  
+              .card-title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333333;
+  
+                span {
+                  display: inline-block;
+                  text-align: center;
+                }
+              }
+            }
+  
+            .wallet-detail-amt {
+              font-size: 20px;
+              font-weight: bold;
+              color: #4caf50;
+              margin-top: 20px;
+  
+              span {
+                display: inline-block;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+      /* Graphs Section */
+      .earning-wallet-graphs {
+        display: flex;
+        gap: 20px;
+  
+        .ets-graph-container {
+            flex: 0.5;
+          padding: 20px;
+          background: #ffffff;
+          border-radius: 24px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  
+          p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+          }
+  
+          .ets-graph-wrapper {
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            margin-top: 10px;
+          }
+        }
+  
+        .earning-analysis-container {
+          flex: 2;
+          padding: 20px;
+          background: #ffffff;
+          border-radius: 24px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  
+          .earning-analysis-wrapper {
+        
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ServiceCard } from "../../../Atom";
-import PricingPlans from "../../pricing";
 import './billing.scss'
 import { CardPayment, MoneyPayment, OfferPayment, RightArrow, TransactionHistory } from "../../../utils/common/svgIcons";
 import { AppRoutes } from "../../../routes";
@@ -64,9 +63,6 @@ export const BillingPayments = (()=>{
                 />
             ))}
                   </div>
-                </div>
-                <div className="billing-col-2">
-                    <PricingPlans/>
                 </div>
             </div>
         </div>

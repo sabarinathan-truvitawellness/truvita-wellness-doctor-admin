@@ -1,15 +1,17 @@
 import React from "react";
 import { AppointmentListCard } from "../../Atom";
+import dummyprofile from '../../Assets/images/header/dummy-dotor-profile.png'
 
 export const Appointments = () => {
   return (
     <div className="appointment-page-container">
       <div className="appointment-page-wrapper">
+        <div className=""></div>
         <div className="appointment-service-section">
           <AppointmentListCard
             consultation="Doctor Consultation"
             location="Texas, United States"
-            doctorName="Dr. Smith"
+            doctorName="John"
             specialization="Cardiologist"
             startTime={"3"}
             fromTime="10:00 AM"
@@ -19,7 +21,7 @@ export const Appointments = () => {
           <AppointmentListCard
             consultation="Doctor Consultation"
             location="Texas, United States"
-            doctorName="Dr. Smith"
+            doctorName="John"
             specialization="Cardiologist"
             startTime={"3"}
             fromTime="10:00 AM"
@@ -29,7 +31,7 @@ export const Appointments = () => {
           <AppointmentListCard
             consultation="Doctor Consultation"
             location="Texas, United States"
-            doctorName="Dr. Smith"
+            doctorName="John"
             specialization="Cardiologist"
             startTime={"3"}
             fromTime="10:00 AM"

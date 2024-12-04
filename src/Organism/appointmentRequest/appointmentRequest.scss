@@ -1,0 +1,125 @@
+.app-request-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .app-request-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .app-request-record-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 24px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+      .patient-info-wrapper {
+        display: flex;
+        gap: 15px;
+        .image-section {
+          align-self: center;
+
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+
+        .patient-info {
+          line-height: 25px;
+          p {
+            margin: 0;
+ 
+            &:first-child {
+              color: #232c2b;
+              font-family: Manrope;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+            }
+
+            &:nth-child(2),
+            &:nth-child(3) {
+                color: rgba(35, 44, 43, 0.50);
+                font-family: Manrope;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .symptom-info{
+        p {
+            color: #0FC0ED;
+            font-family: Manrope;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+      }
+      .place-of-visit{
+        p {
+            color: rgba(35, 44, 43, 0.50);
+font-family: Manrope;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+          }
+      }
+      .patient-preferred-date,.patient-preferred-time{
+        p {
+            color: #232C2B;
+            font-family: Manrope;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+      } 
+
+      .icon-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .icon-wrapper-calender {
+          background-color: rgba(15, 192, 237, 0.2);
+        }
+        .icon-wrapper-cancel {
+          background-color: #fb6262;
+        }
+        .icon-wrapper-tick {
+          background-color: #0fc0ed;
+        }
+
+        .icon-wrapper-calender,
+        .icon-wrapper-cancel,
+        .icon-wrapper-tick {
+          cursor: pointer;
+          padding: 12px;
+          border-radius: 50%;
+          svg {
+            width: 20px;
+            height: 20px;
+
+            &:hover {
+              fill: #017a99;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -22,5 +22,13 @@ export const AppRoutes = {
     pillRemainder:'/pillRemainder',
     aiDocotor: '/aiDocotor',
     aiBooth:'/aiBooth',
-    prescriptionOverView: '/prescriptionOverView'
+    prescriptionOverView: '/prescriptionOverView',
+    patientRecods:"/patientRecords",
+    patientRecorOverview:'/patientRecordOverview',
+    earningWallet:"/earningWallet",
+    appointmentRequest: '/appointmentRequest',
+    appointmentOverview: '/appointmentOverview',
+    doctorOnBoardingProgress:"/doctorOnBoardingProgress",
+    doctorVerificationLanding: '/doctorVerificationLanding',
+    doctorOnboardingForm:'/docotorOnboaringForm'
 };

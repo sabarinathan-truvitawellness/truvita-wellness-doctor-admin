@@ -8,7 +8,7 @@ interface AppNavBarsProps {
 export const AppNavBars: React.FC<AppNavBarsProps> = ({ children }) => {
     return (
         <div className="page-render-container">
-            <div className="container-wrapper flex">
+            <div className="container-wrapper flex justify-between">
                 <div className="pr-col-1">
                     <NavBar />
                 </div>

@@ -1,148 +1,229 @@
 .profile-settings-container {
-    padding: 20px;
-    border-radius: 10px;
-  
-    .profile-setting-wrapper {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-  
-      .colum-one {
-        flex: 6; 
+  padding: 20px;
+  border-radius: 10px;
+
+  .profile-setting-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    .colum-one {
+      flex: 6;
     }
-    
+
     .colum-two {
-        flex: 4; 
-    }
-    }
-  
-    .profile-row {
-      display: flex;
-      align-items: center;
-      padding: 16px;
-      background: linear-gradient(186deg, #0FC0ED -20.25%, #096D87 97.54%);
-      border-radius: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  
-      .img-section {
-        margin-right: 16px;
-        position: relative;
-        .img-edit{
-            position: absolute;
-            bottom: 0px;
-            right: 0px;
-            background-color: white;
-            border-radius: 50%;
-            padding: 5px;
-            
-        }
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-       
-      }
-  
-      .profile-info-content {
-        color: #fff;
-        h2 {
-          margin: 0;
-          font-size: 20px;
-          font-weight: bold;
-        }
-        p {
-          margin: 4px 0;
-          font-size: 14px;
-         
-        }
-      }
-  
-      .profile-edit-option {
-        margin-left: auto;
-        cursor: pointer;
-        svg {
-          width: 20px;
-          height: 20px;
-          fill: #0fc0ed;
-        }
-  
-        &:hover svg {
-          fill: #0a99ba;
-        }
-      }
-    }
-  
-    .info-section {
-      margin-top: 20px;
-      padding: 16px;
-      background-color: #f9f9f9;
-      border-radius: 25px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  
-      .sub-title-section {
+      flex: 4;
+
+      .doctor-profile-cards-container {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-  
-        h2 {
-          margin: 0;
-          font-size: 16px;
-          font-weight: bold;
-        }
-  
-        .edit-info-btn {
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-          color: #0fc0ed;
-          cursor: pointer;
-          svg {
-            margin-left: 4px;
-            width: 14px;
-            height: 14px;
-            fill: #0fc0ed;
-          }
-  
+        // flex-direction: column;
+        gap: 10px;
+
+        .doctor-profile-card-wrapper {
+          background: #ffffff;
+          padding: 20px;
+          border-radius: 16px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s, box-shadow 0.2s;
+
           &:hover {
-            color: #0a99ba;
-  
-            svg {
-              fill: #0a99ba;
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          .doctor-profile-card-row-1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .icon-wrapper {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 40px;
+              height: 40px;
+              border-radius: 12px;
+              background-color: #eff6ff;
+              padding: 12px;
+            }
+
+            .card-title {
+              font-size: 16px;
+              font-weight: 600;
+              color: #333333;
+
+              span {
+                display: inline-block;
+              }
+            }
+          }
+
+          .doctor-profile-detail-amt {
+            color: #017A99;
+            font-family: Manrope;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            margin-top: 20px;
+
+            span {
+              display: inline-block;
             }
           }
         }
       }
-  
-      .info-wrapper {
+    }
+  }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+    .img-section {
+      margin-right: 16px;
+      position: relative;
+
+      .img-edit {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        background-color: white;
+        border-radius: 50%;
+        padding: 5px;
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .profile-info-content {
+      flex: 1;
+      color: black;
+
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 4px 0;
+        font-size: 14px;
+      }
+    }
+
+    .profile-doctor-experience {
+      background: rgba(15, 192, 237, 0.2);
+      padding: 12px;
+      border-radius: 24px;
+
+      .experience-card-wrapper {
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 12px;
-  
-        .info-content {
-          flex: 1;
-          margin-right: 16px;
-  
-          h3 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: bold;
-          }
-  
-          p {
-            margin: 4px 0 0;
-            font-size: 12px;
-            color: #6d6d6d;
-          }
+
+        .icon-wrapper {
+          background-color: #fff;
+          padding: 18px;
+          border-radius: 16px;
+          margin-right: 12px;
         }
-  
-        &:last-child {
-          margin-right: 0;
+
+        .experience-contents {
+          line-height: 25px;
+
+          :nth-child(1) {
+            color: #017a99;
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          :nth-child(2),
+          :nth-child(3) {
+            color: #017a99;
+            font-size: 14px;
+            font-weight: 500;
+          }
         }
       }
     }
   }
-  
+
+  .info-section {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 25px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+    .sub-title-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .edit-info-btn {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #0fc0ed;
+        cursor: pointer;
+
+        svg {
+          margin-left: 4px;
+          width: 14px;
+          height: 14px;
+          fill: #0fc0ed;
+        }
+
+        &:hover {
+          color: #0a99ba;
+
+          svg {
+            fill: #0a99ba;
+          }
+        }
+      }
+    }
+
+    .info-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+
+      .info-content {
+        flex: 1;
+        margin-right: 16px;
+
+        h3 {
+          margin: 0;
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        p {
+          margin: 4px 0 0;
+          font-size: 12px;
+          color: #6d6d6d;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

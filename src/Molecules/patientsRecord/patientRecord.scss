@@ -1,0 +1,146 @@
+.patient-recor-super-container {
+  // padding: 0 0 0 ;
+
+  .patients-record-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 24px;
+    // max-width: 500px;
+    width:100%;
+
+    .pr-title {
+      color: #232c2b;
+      font-family: Manrope;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .patients-record-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto;
+      height: 22vh;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .pr-short-card-container {
+      background-color: #fff;
+      border-radius: 24px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+
+      .pr-short-card-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .pr-date {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-radius: 16px;
+          background: rgba(15, 192, 237, 0.12);
+          font-size: 0.9rem;
+          font-weight: bold;
+          color: #666;
+          padding: 9px;
+          margin-right: 12px;
+
+          span:first-child {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+          }
+
+          span:last-child {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+          }
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid #ddd;
+        }
+
+        .patient-info {
+          margin-left: 12px;
+
+          h3 {
+            color: #232c2b;
+            font-family: Manrope;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-bottom: 5px;
+          }
+
+          p {
+            font-size: 0.9rem;
+            color: #666;
+          }
+        }
+
+        .btn-section {
+          display: flex;
+          gap: 0.5rem;
+
+          div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #f1f1f1;
+            }
+          }
+
+          .calender-btn {
+            background-color: #b7e4ef;
+            padding: 8px;
+            border-radius: 50%;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          .cancel-btn {
+            background-color: #ff6b6b;
+            padding: 8px;
+            border-radius: 50%;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          .tick-btn {
+            background-color: #0fc0ed;
+            padding: 8px;
+            border-radius: 50%;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

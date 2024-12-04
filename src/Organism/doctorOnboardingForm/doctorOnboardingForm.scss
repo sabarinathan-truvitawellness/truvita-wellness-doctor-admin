@@ -1,0 +1,41 @@
+/* Container */
+.doctor-onboarding-form-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+/* Wrapper */
+.form-wrapper {
+  width: 100%;
+  max-width: 800px;
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Row */
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+
+  /* Make inputs stack in smaller screens */
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+/* Input Wrapper */
+.global-input-wrapper {
+  flex: 1;
+}
+
+.internal-input-firstname,
+.internal-input-lastname {
+  width: 100%;
+}

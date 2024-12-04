@@ -9,7 +9,15 @@ import {
   RegisterFamily,
   Settings,
   TicketChat,
-  PreacriptionOverView
+  PreacriptionOverView,
+  PatientRecordList,
+  PatientRecordsOverview,
+  EarningWallet,
+  AppointmentRequest,
+  AppointmentOverview,
+  DoctorOnboardingProgress,
+  DoctorVerificationLanding,
+  DocotorOnBoardingForm
 } from "../Organism";
 import { Inbox } from "../Organism/inbox";
 
@@ -53,5 +61,38 @@ export const PrivatePages = [
   {
     path:AppRoutes.prescriptionOverView,
     element: <PreacriptionOverView/>
+  },
+  {
+    path:AppRoutes.patientRecods,
+    element: <PatientRecordList/>
+  },
+  {
+    path:AppRoutes.patientRecorOverview,
+    element: <PatientRecordsOverview/>
+
+  },
+  {
+    path:AppRoutes.earningWallet,
+    element: <EarningWallet/>
+  },
+  {
+    path:AppRoutes.appointmentRequest,
+    element: <AppointmentRequest/>
+  },
+  {
+    path: AppRoutes.appointmentOverview,
+    element:<AppointmentOverview/>
+  },
+  {
+    path: AppRoutes.doctorOnBoardingProgress,
+    element: <DoctorOnboardingProgress/>
+  },
+  {
+    path: AppRoutes.doctorVerificationLanding,
+    element: <DoctorVerificationLanding/> 
+  },
+  {
+    path:AppRoutes.doctorOnboardingForm,
+    element: <DocotorOnBoardingForm/>
   }
 ];

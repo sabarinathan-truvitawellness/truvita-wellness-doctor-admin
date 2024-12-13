@@ -26,7 +26,7 @@ export const OtpVerify = createApi({
   endpoints: (builder) => ({
     verifyOTP: builder.mutation({
       query: (payload) => ({
-        url: "/patients/otp/verify/",
+        url: "/doctor/otp/verify/",
         method: "POST",
         body: { otp: payload.otp },
       }),
@@ -43,7 +43,7 @@ export const OtpVerify = createApi({
 
     resendOTP: builder.mutation({
       query:() => ({
-        url: "/patients/otp/patientresendotp/",
+        url: "/doctor/otp/doctorresend/",
         method: "POST",
         
       }),

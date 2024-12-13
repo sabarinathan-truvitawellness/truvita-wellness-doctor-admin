@@ -3,9 +3,6 @@ export const AppRoutes = {
     login: '/login',
     signUp: '/signUp',
     home: '/dashboard',
-    doctorConsultation: '/doctor-consultation',
-    aiBoothConsultation: '/ai-booth-consultation',
-    wellNesProgram: '/wellness-program',
     verifyOtp: '/verify-otp',
     forgotPassword:'/forgot-password',
     resetPassword: '/reset-password/:token',
@@ -19,7 +16,6 @@ export const AppRoutes = {
     ticketChat: '/ticketChat',
     inbox:'/inbox',
     prescription:'/prescription',
-    pillRemainder:'/pillRemainder',
     aiDocotor: '/aiDocotor',
     aiBooth:'/aiBooth',
     prescriptionOverView: '/prescriptionOverView',
@@ -30,5 +26,6 @@ export const AppRoutes = {
     appointmentOverview: '/appointmentOverview',
     doctorOnBoardingProgress:"/doctorOnBoardingProgress",
     doctorVerificationLanding: '/doctorVerificationLanding',
-    doctorOnboardingForm:'/docotorOnboaringForm'
+    doctorOnboardingForm:'/docotorOnboaringForm',
+    slotMaker:'/slotMaker',
 };

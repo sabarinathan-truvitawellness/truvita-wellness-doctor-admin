@@ -4,6 +4,8 @@ import { DashBoardCalender } from "../../Atom";
 import { Calender } from "../../utils/common/svgIcons";
 import "./calederWithAppointments.scss";
 import dummyProfile from '../../Assets/images/header/profile-avatar-xxl.png'
+import { Link } from "react-router-dom";
+import { AppRoutes } from "../../routes";
 
 export const CalenderWithAppointment = () => {
   const appointmentData = [
@@ -64,6 +66,7 @@ export const CalenderWithAppointment = () => {
         <p className="section-title">Upcoming Appointments</p>
         <div className="appointments-list-container">
           {appointmentData.map((res, index) => (
+            <Link to={AppRoutes.appointments}>
             <div className="app-list-card-container" key={index}>
               <div className="app-list-card-wrapper">
                 <div className="card-info">
@@ -88,6 +91,7 @@ export const CalenderWithAppointment = () => {
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>

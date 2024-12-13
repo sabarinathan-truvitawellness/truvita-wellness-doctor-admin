@@ -11,3 +11,5 @@ export * from './appointmentListCard';
 export * from './doctorInfoShortCard';
 export * from './textBox';
 export * from './dashboardCalender';
+export * from './modelOvrlay';
+export * from './rangeInput';

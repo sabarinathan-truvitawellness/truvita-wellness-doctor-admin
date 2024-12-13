@@ -1,5 +1,5 @@
 .select-container {
-    margin: 1rem 0;
+    // margin: 1rem 0;
     
     .MuiFormControl-root {
       width: 100%;
@@ -26,9 +26,11 @@
       }
     }
   
-    .MuiNativeSelect-root {
-      font-size: 1rem;
-      border-radius: 48px; // Add border-radius for the native select
+    .MuiOutlinedInput-notchedOutline {
+      border-radius: 25px;
+      border: solid 2px gray;
+      background: transparent;
+      bottom: 1px;
     }
   
     option {

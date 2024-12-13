@@ -6,7 +6,7 @@ import { useProfileDataQuery } from "../../../redux/services/profile";
 
 
 export const ProfileSetting = () => {
-  const { data, error, isLoading } = useProfileDataQuery({ userId: 17 });
+  const { data, error, isLoading } = useProfileDataQuery({ userId: 23 });
   console.log(data)
   const editInfo = () => {};
 
@@ -84,8 +84,8 @@ export const ProfileSetting = () => {
             </div>
             <div className="info-wrapper">
               <div className="info-content">
-                <h3>Blood Group</h3>
-                <p>o+</p>
+                {/* <h3>Blood Group</h3>
+                <p>o+</p> */}
               </div>
 
               <div className="info-content">
@@ -98,7 +98,7 @@ export const ProfileSetting = () => {
           <div className="info-section">
             <div className="sub-title-section">
               {" "}
-              <h2>Address</h2>{" "}
+              <h2>About Yourself</h2>{" "}
               <div className="edit-info-btn" onClick={editInfo}>
                 Edit <Editpen />
               </div>
@@ -135,7 +135,7 @@ export const ProfileSetting = () => {
                     </div>
                   </div>
                   <div className="doctor-profile-detail-amt">
-                    <span>${res.detailedAmt}</span>
+                    <span>{res.detailedAmt}</span>
                   </div>
                 </div>
               );

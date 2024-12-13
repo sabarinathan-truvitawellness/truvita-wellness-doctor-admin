@@ -20,8 +20,6 @@ export const Home = () => {
           </div>
           <div className="left-bottom-container">
             <PatientsRecord />
-           
-            {/* <div className="dummy"></div> */}
           </div>
         </div>
         <div className="calender-section-wrapper">

@@ -20,3 +20,4 @@
     export * from './doctorOnBoardingProgress';
     export * from './doctorVerificationLanding';
     export * from './doctorOnboardingForm';
+    export * from './createSlots'

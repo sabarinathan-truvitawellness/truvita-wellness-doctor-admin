@@ -11,6 +11,8 @@ import {
 } from "../../utils/common/svgIcons";
 import { Button } from "../button";
 import doctorDummyImage from '../../Assets/images/header/profile-image-avatar.png';
+import { Link } from "react-router-dom";
+import { AppRoutes } from "../../routes";
 
 interface InputProps {
   doctorName: string;
@@ -34,6 +36,7 @@ export const AppointmentListCard: React.FC<InputProps> = ({
   location
 }) => {
   return (
+    <Link to={AppRoutes.patientRecorOverview}>
     <div className="appointment-list-container">
       <div className="apointment-warpper">
         <div className="list-col-2">
@@ -73,5 +76,6 @@ export const AppointmentListCard: React.FC<InputProps> = ({
         </div>
       </div>
     </div>
+    </Link>
   );
 };

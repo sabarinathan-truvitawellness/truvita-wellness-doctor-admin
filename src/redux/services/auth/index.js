@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { config } from '../../../config';
 import { setAuth } from '../../slices/auth';
+import { LocalStorageKeys } from '../../../utils/common/constant';
 
   
 
@@ -48,6 +49,16 @@ export const AuthAPI = createApi({
       }),
       
 
+       //refresh API
+       refresh: builder.mutation({
+        query: () => ({
+          url: "auth/api/verify-access-token/",
+          method: "POST",
+          body: { token: localStorage.getItem(LocalStorageKeys.authToken) },
+        }),
+       
+      }),
+
       //resetPassword
       resetPassword: builder.mutation({
         query: (payload) => ({
@@ -77,7 +88,7 @@ export const AuthAPI = createApi({
       //signup patients api
     signUp: builder.mutation({
       query: (payload) => ({
-        url: 'patients/signup/',
+        url: 'doctor/signup/',
         credentials: 'include',
         method: 'POST',
         headers: {

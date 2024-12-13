@@ -1,0 +1,55 @@
+.time-slot-maker {
+    .day-slot {
+      margin-bottom: 20px;
+      .day-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        span {
+          margin-left: 10px;
+        }
+        .add-slot {
+          margin-left: auto;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+      }
+  
+      .slot-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+  
+        input {
+          width: 100px;
+          margin-right: 10px;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+  
+          &.error {
+            border-color: red;
+          }
+        }
+  
+        .remove-slot {
+          margin-left: 10px;
+          background-color: red;
+          color: white;
+          border: none;
+          padding: 5px;
+          cursor: pointer;
+        }
+  
+        .helper-text {
+          color: red;
+          font-size: 12px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  

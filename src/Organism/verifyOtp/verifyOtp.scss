@@ -1,9 +1,38 @@
+.otp-Header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #e9eaeb;
+  border-radius: 25px;
+  margin: 20px 10px;
+  .otp-header-container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+
+    .brand-logo-img {
+      // margin-bottom: 20px;
+
+      img {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+
 .otp-container {
   width: 100%;
   display: flex;
   justify-content: center;
   .otp-container-wrapper {
     max-width: 440px;
+    margin-top: 20px;
     .content-wrapper {
       h1 {
         color: #232c2b;

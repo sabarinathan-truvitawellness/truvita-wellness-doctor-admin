@@ -4,8 +4,9 @@ export * from './profileOverlay';
 export * from './notificationOverlay';
 export * from './settingsChildrenPages';
 export * from './analysisCard';
-export * from './consultationReport'
+export * from './consultationReport';
 export * from './patientsRecord';
 export * from './genderAnalysis';
 export * from './calenderWithAppointments';
 export * from './eraningAnalysisyReport';
+export * from './timeSlotMaker';

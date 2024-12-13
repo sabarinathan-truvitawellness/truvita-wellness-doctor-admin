@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import "./patientRecords.scss";
 import dummyAvatatr from '../../Assets/images/header/profile-image-avatar.png'
+import { AppRoutes } from "../../routes";
 
 export const PatientRecordsOverview = () => {
   const patientListData = [
@@ -208,6 +209,7 @@ export const PatientRecordsOverview = () => {
             <div className="prescription-info-cards">
               <p>Prescriptions</p>
               {prescriptionListData.map((res, index) => (
+                <Link to={AppRoutes.prescription}>
                 <div key={index} className="prescription-card-container">
                   <div className="prescription-card-wrapper">
                     <div className="image-wrapper">
@@ -220,6 +222,7 @@ export const PatientRecordsOverview = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               ))}
             </div>
           </div>

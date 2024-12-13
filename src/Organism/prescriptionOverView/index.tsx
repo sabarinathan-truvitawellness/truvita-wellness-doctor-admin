@@ -22,12 +22,12 @@ export const PreacriptionOverView = () => {
   return (
     <div className="view-prescription-container">
       <div className="view-prescription-wrapper">
-        <div className="download-btn-wrapper">
+        {/* <div className="download-btn-wrapper">
           <Button
             buttonText="Download Prescription"
             externalClassName="download-btn"
           />
-        </div>
+        </div> */}
 
         <div className="prescription-overview-container">
           <div className="prescription-overview-header">

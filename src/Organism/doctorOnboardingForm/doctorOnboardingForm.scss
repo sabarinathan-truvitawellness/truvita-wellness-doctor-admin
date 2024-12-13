@@ -4,20 +4,21 @@
   justify-content: center;
   padding: 2rem;
   background-color: #f9f9f9;
+  .form-wrapper {
+    width: 100%;
+    max-width: 800px;
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }
 
 /* Wrapper */
-.form-wrapper {
-  width: 100%;
-  max-width: 800px;
-  background: #ffffff;
-  padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+
 
 /* Row */
 .form-row {

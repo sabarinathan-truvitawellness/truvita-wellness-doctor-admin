@@ -17,7 +17,8 @@ import {
   AppointmentOverview,
   DoctorOnboardingProgress,
   DoctorVerificationLanding,
-  DocotorOnBoardingForm
+  DocotorOnBoardingForm,
+  CreateSlots,
 } from "../Organism";
 import { Inbox } from "../Organism/inbox";
 
@@ -94,5 +95,10 @@ export const PrivatePages = [
   {
     path:AppRoutes.doctorOnboardingForm,
     element: <DocotorOnBoardingForm/>
-  }
+  },
+  {
+    path: AppRoutes.slotMaker,
+    element: <CreateSlots/>
+  },
+  
 ];

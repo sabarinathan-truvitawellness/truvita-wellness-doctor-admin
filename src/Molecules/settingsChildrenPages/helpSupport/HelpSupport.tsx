@@ -16,13 +16,13 @@ export const HelpSupport = () => {
       serviceIcon: <CallSupport />,
       rightArrowIcon: <RightArrow />,
       serviceName: "Add Payment Methods",
-      to: AppRoutes.doctorConsultation,
+      to: AppRoutes.ticketChat,
     },
     {
       serviceIcon: <LiveChart />,
       rightArrowIcon: <RightArrow />,
       serviceName: "Promotions & Discounts",
-      to: AppRoutes.aiBoothConsultation,
+      to: AppRoutes.ticketChat,
     },
     {
       serviceIcon: <Ticket />,

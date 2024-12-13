@@ -6,6 +6,7 @@ import { notification, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { otpSentSuccess,otpVerificationStarted,updateTimeLeft,resetOtpSate } from "../../redux/slices/otp";
+import brandLogo from "../../Assets/images/home/truvita-logo.png";
 
 // Typing the Redux state
 interface RootState {
@@ -133,6 +134,14 @@ export const VerifyOtp: React.FC = () => {
 
   return (
     <Spin spinning={veryOtpData.isLoading || resendOtpData.isLoading}>
+
+<div className="otp-Header-container">
+        <div className="otp-header-container-wrapper">
+          <div className="brand-logo-img">
+            <img src={brandLogo} />
+          </div>
+        </div>
+      </div>
       <div className="otp-container">
         <div className="otp-container-wrapper">
           <div className="content-wrapper">

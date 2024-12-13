@@ -11,13 +11,13 @@ export const BillingPayments = (()=>{
             serviceIcon: <CardPayment />,
             rightArrowIcon: <RightArrow />,
             serviceName: "Add Payment Methods",
-            to: AppRoutes.doctorConsultation 
+            to: AppRoutes.ticketChat 
         },
         {
             serviceIcon: <OfferPayment />,
             rightArrowIcon: <RightArrow />,
             serviceName: "Promotions & Discounts",
-            to: AppRoutes.aiBoothConsultation 
+            to: AppRoutes.ticketChat
         },
         {
             serviceIcon: < MoneyPayment />,

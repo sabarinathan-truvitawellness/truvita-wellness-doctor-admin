@@ -1,9 +1,55 @@
-.conatiner-wrappe{
-    margin: 0 auto;
+.login-Header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #e9eaeb;
+  border-radius: 25px;
+  margin: 10px;
+  .login-header-container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
 
-    .forgot-password-wrapper{
-        margin-left: 20px;
-        color: #00a8cc;
-        text-align:center;
+    .brand-logo-img {
+      // margin-bottom: 20px;
+
+      img {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+      }
     }
+  }
+}
+
+.conatiner-wrappe {
+  margin: 40px auto;
+
+  .title-area {
+    text-align: center;
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin: 0;
+    }
+  }
+
+  .forgot-password-wrapper {
+    margin-left: 20px;
+    margin-top: 12px;
+    color: #00a8cc;
+    text-align: left;
+  }
+  .custom-button {
+    border-radius: 48px;
+    background: #0fc0ed;
+    padding: 12px;
+    margin-top: 40px;
+        color: white;
+    font-weight: 700;
+  }
 }

@@ -46,12 +46,7 @@ export const PatientsRecord: React.FC = () => {
         {patientsRequest.map((res, index) => (
           <div className="pr-short-card-container" key={index}>
             <div className="pr-short-card-wrapper">
-              <div className="pr-date">
-                <time dateTime={res.date}>
-                  <span className="day">{res.day}</span>
-                  <span className="date">{res.date}</span>
-                </time>
-              </div>
+            
               <div className="flex">
               <img
                 src={res.imageUrl}
@@ -62,6 +57,16 @@ export const PatientsRecord: React.FC = () => {
                 <h3>{res.name || "Unknown Patient"}</h3>
                 <p>{`${res.age || "N/A"} | ${res.gender || "N/A"}`}</p>
               </div>
+              </div>
+
+              <div className="pr-symtom-check">
+                <p>Symptom Check</p>
+              </div>
+              <div className="pr-time">
+                <p>02:40 - 03:00</p>
+              </div>
+              <div className="pr-date">
+                <p>11/12/2024</p>
               </div>
               <div className="btn-section">
                 <button

@@ -1,55 +1,101 @@
 .time-slot-maker {
-    .day-slot {
-      margin-bottom: 20px;
-      .day-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        span {
-          margin-left: 10px;
-        }
-        .add-slot {
-          margin-left: auto;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          padding: 5px 10px;
-          cursor: pointer;
-        }
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  // padding: 20px;
+  // background-color: #f9f9f9;
+  border-radius: 8px;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .day-slot {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+
+      span {
+        margin-left: 10px;
+        font-size: 16px;
+        color: #333;
       }
-  
-      .slot-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-  
-        input {
-          width: 100px;
-          margin-right: 10px;
-          padding: 5px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-  
-          &.error {
-            border-color: red;
-          }
+
+      input[type="checkbox"] {
+        transform: scale(1.2);
+        margin-right: 10px;
+      }
+
+      .add-slot {
+        margin-left: auto;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #0056b3;
         }
-  
-        .remove-slot {
-          margin-left: 10px;
-          background-color: red;
-          color: white;
-          border: none;
-          padding: 5px;
-          cursor: pointer;
-        }
-  
-        .helper-text {
-          color: red;
-          font-size: 12px;
-          margin-left: 10px;
+
+        &:disabled {
+          background-color: #cccccc;
+          cursor: not-allowed;
         }
       }
     }
+
+    .slot-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .MuiTextField-root {
+        width: 150px;
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 16px;
+        margin: 0 5px;
+      }
+
+      .remove-slot {
+        margin-left: 10px;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #cc0000;
+        }
+      }
+
+      .error-text {
+        color: red;
+        font-size: 12px;
+        margin-left: 15px;
+        font-style: italic;
+      }
+    }
+
+    .error-text {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
   }
-  
+}

@@ -1,0 +1,25 @@
+.time-with-name-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  
+    .form-control {
+      margin: 0;
+  
+      &.error {
+        .inputField {
+          border-color: red;
+        }
+  
+        .helper-text {
+          color: red;
+        }
+      }
+    }
+  
+    .helper-text {
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+  }
+  

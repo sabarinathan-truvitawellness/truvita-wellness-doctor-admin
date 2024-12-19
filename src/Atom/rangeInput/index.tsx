@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 
@@ -6,7 +6,9 @@ interface PriceRangeProps {
   minPrice: number;
   maxPrice: number;
   step?: number;
-  onPriceChange?: (values: number[]) => void;
+  onPriceChange?: (values: number[], name: string) => void;
+  label?: string;
+  name?: string;
 }
 
 const MinMaxPricing: React.FC<PriceRangeProps> = ({
@@ -14,20 +16,28 @@ const MinMaxPricing: React.FC<PriceRangeProps> = ({
   maxPrice,
   step = 1,
   onPriceChange,
+  label = "",
+  name = ""
 }) => {
   const [priceRange, setPriceRange] = useState<number[]>([minPrice, maxPrice]);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setPriceRange(newValue as number[]);
+  // Synchronize priceRange with parent props when they change
+  useEffect(() => {
+    setPriceRange([minPrice, maxPrice]);
+  }, [minPrice, maxPrice]);
+
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    const newRange = newValue as number[];
+    setPriceRange(newRange); // Update local state
     if (onPriceChange) {
-      onPriceChange(newValue as number[]);
+      onPriceChange(newRange, name); // Call parent handler
     }
   };
 
   return (
     <Box sx={{ width: 400, padding: 2 }}>
       <Typography variant="h6" gutterBottom>
-        Select Price Range
+        {label}
       </Typography>
       <Box display="flex" justifyContent="space-between">
         <Typography>${priceRange[0]}</Typography>

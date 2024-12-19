@@ -293,8 +293,6 @@ export const Signup = () => {
     });
   };
 
-  console.log("errrrrrrrrrrror", error);
-
   const isFormValid = () => {
     // Run validations for different fields and gather the errors
     const _error = {
@@ -485,9 +483,6 @@ export const Signup = () => {
                   value={formData["middleName"] || ""}
                 />
               </div>
-
-              
-            
 
             <div className="internal-register-form-row-2">
               <div className="global-input-wrapper">

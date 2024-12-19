@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import "./timeSlotMaker.scss"; // Add your custom styles
+import "./timeSlotMaker.scss"; // Custom styles
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import dayjs, { Dayjs } from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+import { useCreateSlotMutation } from "../../redux/services";
+import { LocalStorageKeys } from "../../utils/common/constant";
+
+// Add the isBetween plugin
+dayjs.extend(isBetween);
 
 type TimeSlot = {
   start: string;
@@ -7,19 +17,22 @@ type TimeSlot = {
 };
 
 type DaySlot = {
-    active: boolean;
-    slots: TimeSlot[];
-    error?: string | null; // Add this to allow the optional error field
-  };
-  
+  active: boolean;
+  slots: TimeSlot[];
+  error?: string | null;
+};
 
-const defaultSlot: TimeSlot = { start: "9:00am", end: "5:00pm" };
+const defaultSlot: TimeSlot = { start: "", end: "" };
 
-export const 
-TimeSlotMaker = () => {
+export const TimeSlotMaker = () => {
+
+  const userId = localStorage.get(LocalStorageKeys.authToken)
+
+  const [DoctorSlots,{isLoading,isError}] = useCreateSlotMutation({userId:userId});
+
   const [timeSlots, setTimeSlots] = useState<Record<string, DaySlot>>({
     SUN: { active: false, slots: [] },
-    MON: { active: true, slots: [defaultSlot] },
+    MON: { active: true, slots: [] },
     TUE: { active: false, slots: [] },
     WED: { active: false, slots: [] },
     THU: { active: false, slots: [] },
@@ -27,56 +40,50 @@ TimeSlotMaker = () => {
     SAT: { active: false, slots: [] },
   });
 
-  const validateSlot = (start: string, end: string, slots: TimeSlot[]): string | null => {
-    const startTime = new Date(`1970-01-01T${convertTo24Hour(start)}`);
-    const endTime = new Date(`1970-01-01T${convertTo24Hour(end)}`);
+  console.log(timeSlots)
 
-    if (endTime <= startTime) return "Choose an end time later than the start time.";
+  const validateSlot = (start: string, end: string, slots: TimeSlot[]): string | null => {
+    if (!start || !end) return "Start and End times are required.";
+    
+    const startTime = dayjs(`1970-01-01T${start}`);
+    const endTime = dayjs(`1970-01-01T${end}`);
+
+    if (!startTime.isValid() || !endTime.isValid()) return "Invalid time format.";
+    if (endTime.isBefore(startTime)) return "The end time must be greater than the start time. Please select a valid time range.";
+
 
     for (const slot of slots) {
-      const slotStart = new Date(`1970-01-01T${convertTo24Hour(slot.start)}`);
-      const slotEnd = new Date(`1970-01-01T${convertTo24Hour(slot.end)}`);
-
+      const slotStart = dayjs(`1970-01-01T${slot.start}`);
+      const slotEnd = dayjs(`1970-01-01T${slot.end}`);
       if (
-        (startTime < slotEnd && startTime >= slotStart) ||
-        (endTime > slotStart && endTime <= slotEnd)
+        (startTime.isBetween(slotStart, slotEnd, null, "[)")) ||
+        (endTime.isBetween(slotStart, slotEnd, null, "(]")) ||
+        (startTime.isSame(slotStart) && endTime.isSame(slotEnd))
       ) {
-        return "Times overlap with another set of times.";
+        return "Times overlap with another slot.";
       }
     }
 
     return null;
   };
 
- function convertTo24Hour(time: string | undefined): string {
-  if (!time) {
-    console.error("convertTo24Hour received undefined time");
-    return ""; // Return a default or error string
-  }
-
-  const [timeValue, period] = time.split(" "); // Ensure this is safe
-  if (!timeValue || !period) {
-    console.error("Invalid time format: ", time);
-    return "";
-  }
-
-  const [hours, minutes] = timeValue.split(":");
-  const hourIn24Format =
-    period.toLowerCase() === "pm" && parseInt(hours) !== 12
-      ? parseInt(hours) + 12
-      : period.toLowerCase() === "am" && parseInt(hours) === 12
-      ? 0
-      : parseInt(hours);
-
-  return `${hourIn24Format}:${minutes}`;
-}
+  const calculateTotalHours = (slots: TimeSlot[]): number => {
+    return slots.reduce((total, slot) => {
+      const startTime = dayjs(`1970-01-01T${slot.start}`);
+      const endTime = dayjs(`1970-01-01T${slot.end}`);
+      return total + endTime.diff(startTime, "hour", true);
+    }, 0);
+  };
 
   const handleAddSlot = (day: string) => {
     const daySlot = timeSlots[day];
-    const newSlots = [...daySlot.slots, { start: "", end: "" }];
+    const totalHours = calculateTotalHours(daySlot.slots);
+    if (totalHours >= 24) return;
+
+    const newSlots = [...daySlot.slots, { ...defaultSlot }];
     setTimeSlots({
       ...timeSlots,
-      [day]: { ...daySlot, slots: newSlots },
+      [day]: { ...daySlot, slots: newSlots, error: null },
     });
   };
 
@@ -89,23 +96,22 @@ TimeSlotMaker = () => {
     });
   };
 
-  const handleSlotChange = (day: string, index: number, key: "start" | "end", value: string) => {
+  const handleSlotChange = (day: string, index: number, key: "start" | "end", value: Dayjs | null) => {
     const daySlot = timeSlots[day];
     const newSlots = [...daySlot.slots];
-    newSlots[index][key] = value;
-  
+    newSlots[index][key] = value ? value.format("HH:mm") : "";
+
     const error = validateSlot(
       newSlots[index].start,
       newSlots[index].end,
       newSlots.filter((_, i) => i !== index)
     );
-  
+
     setTimeSlots({
       ...timeSlots,
       [day]: { ...daySlot, slots: newSlots, error },
     });
   };
-  
 
   const toggleDay = (day: string) => {
     const daySlot = timeSlots[day];
@@ -113,7 +119,8 @@ TimeSlotMaker = () => {
       ...timeSlots,
       [day]: {
         active: !daySlot.active,
-        slots: !daySlot.active ? [defaultSlot] : [],
+        slots: !daySlot.active ? [{ ...defaultSlot }] : [],
+        error: null,
       },
     });
   };
@@ -130,7 +137,11 @@ TimeSlotMaker = () => {
             />
             <span>{day}</span>
             {daySlot.active && (
-              <button onClick={() => handleAddSlot(day)} className="add-slot">
+              <button
+                onClick={() => handleAddSlot(day)}
+                className="add-slot"
+                disabled={calculateTotalHours(daySlot.slots) >= 24}
+              >
                 +
               </button>
             )}
@@ -139,33 +150,25 @@ TimeSlotMaker = () => {
           {daySlot.active &&
             daySlot.slots.map((slot, index) => (
               <div key={index} className="slot-row">
-                <input
-                  type="text"
-                  value={slot.start}
-                  placeholder="Start Time"
-                  onChange={(e) => handleSlotChange(day, index, "start", e.target.value)}
-                  className={validateSlot(slot.start, slot.end, daySlot.slots.filter((_, i) => i !== index)) ? "error" : ""}
-                />
-                <span>-</span>
-                <input
-                  type="text"
-                  value={slot.end}
-                  placeholder="End Time"
-                  onChange={(e) => handleSlotChange(day, index, "end", e.target.value)}
-                  className={validateSlot(slot.start, slot.end, daySlot.slots.filter((_, i) => i !== index)) ? "error" : ""}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimePicker
+                    value={slot.start ? dayjs(`1970-01-01T${slot.start}`) : null}
+                    onChange={(value) => handleSlotChange(day, index, "start", value)}
+                  />
+                  <span>-</span>
+                  <TimePicker
+                    value={slot.end ? dayjs(`1970-01-01T${slot.end}`) : null}
+                    onChange={(value) => handleSlotChange(day, index, "end", value)}
+                  />
+                </LocalizationProvider>
                 <button onClick={() => handleRemoveSlot(day, index)} className="remove-slot">
                   x
                 </button>
-                <div className="helper-text">
-                  {validateSlot(slot.start, slot.end, daySlot.slots.filter((_, i) => i !== index))}
-                </div>
               </div>
             ))}
+          {daySlot.error && <div className="error-text">{daySlot.error}</div>}
         </div>
       ))}
     </div>
   );
 };
-
-

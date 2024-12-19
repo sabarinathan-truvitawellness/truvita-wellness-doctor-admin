@@ -1,171 +1,299 @@
-.dobp-container {
-    padding: 2rem;
-    background-color: #f9fafc;
-  }
-  
-  .dobp-wrapper {
+$primary-color: #1cb0f6;
+$secondary-color: #e5e5e5;
+$inactive-color: #c4c4c4;
+$button-color: #1cb0f6;
+
+.login-Header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #e9eaeb;
+  border-radius: 25px;
+  margin: 10px;
+  .login-header-container-wrapper {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-  
-    .dobp-col-1,
-    .dobp-col-2 {
-      flex: 1;
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+
+    .brand-logo-img {
+      // margin-bottom: 20px;
+
+      img {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+      }
     }
-  
-    .dobp-col-1-wrapper {
+  }
+}
+
+.dobp-container {
+  padding: 2rem;
+  background-color: #f9fafc;
+}
+
+.dobp-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  .dobp-col-1 {
+    .profile-setup-container {
       text-align: center;
+      font-family: Arial, sans-serif;
+      color: #333;
+    
+      .profile-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+    
+      .progress-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        margin-bottom: 20px;
+    
+        .progress-bg {
+          color: $secondary-color; // Background gray arc
+        }
+        .MuiCircularProgress-circle{
+          stroke-linecap: round;
+        }
+
   
-      h2 {
-        max-width: 470px;
-        color: #232C2B;
+    
+        .progress-foreground {
+          color: $primary-color; // Blue progress arc
+        }
+    
+        .progress-percentage {
+          font-size: 24px;
+          font-weight: bold;
+          color: $primary-color;
+        }
+    
+        .progress-subtext {
+          font-size: 12px;
+          color: #333;
+        }
+    
+        .progress-steps {
+          display: flex;
+          justify-content: space-between;
+          width: 180px;
+          margin-top: -20px;
+    
+          .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border: 2px solid transparent;
+    
+            &-active {
+              background-color: $primary-color;
+              color: white;
+              border-color: $primary-color;
+            }
+    
+            &-current {
+              background-color: white;
+              color: $primary-color;
+              border-color: $primary-color;
+            }
+    
+            &-inactive {
+              background-color: white;
+              color: $inactive-color;
+              border-color: $inactive-color;
+            }
+          }
+        }
+      }
+    
+      .profile-description {
+        font-size: 14px;
+        margin: 10px auto 20px;
+        color: #555;
+        max-width: 60%;
+      }
+    
+      .resume-button {
+        background-color: $button-color;
+        color: white;
+        border-radius: 20px;
+        padding: 10px 30px;
+        font-size: 14px;
+        cursor: pointer;
+        text-transform: none;
+    
+        &:hover {
+          background-color: darken($button-color, 10%);
+        }
+      }
+    }
+  }
+  .dobp-col-1,
+  .dobp-col-2 {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .dobp-col-1-wrapper {
+    text-align: center;
+
+    h2 {
+      max-width: 470px;
+      color: #232c2b;
+      text-align: center;
+      font-family: Manrope;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin: 0 auto;
+    }
+
+    .dobp-progress-circle {
+      position: relative;
+      margin: 2rem 0;
+
+      .dobp-circle {
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 20px solid #00b2ff;
+        border-top-color: #e4e4e4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .dobp-progress {
+          text-align: center;
+
+          .dobp-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00b2ff;
+          }
+
+          .dobp-text {
+            margin-top: 0.5rem;
+            color: #666666;
+            font-size: 0.875rem;
+          }
+        }
+      }
+
+      .dobp-desc {
+        margin-top: 20px;
+        color: #017a99;
         text-align: center;
         font-family: Manrope;
-        font-size: 24px;
+        font-size: 16px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
         line-height: normal;
-        margin: 0 auto;
-      }
-  
-      .dobp-progress-circle {
-        position: relative;
-        margin: 2rem 0;
-  
-        .dobp-circle {
-            margin: 0 auto;
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          border: 20px solid #00b2ff;
-          border-top-color:#e4e4e4 ;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-  
-          .dobp-progress {
-            text-align: center;
-  
-            .dobp-percentage {
-              font-size: 2rem;
-              font-weight: bold;
-              color: #00b2ff;
-            }
-  
-            .dobp-text {
-              margin-top: 0.5rem;
-              color: #666666;
-              font-size: 0.875rem;
-            }
-          }
-        }
-  
-        .dobp-desc {
-          margin-top: 20px;
-          color: #017A99;
-          text-align: center;
-          font-family: Manrope;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: normal;
-        }
-      }
-  
-      .dobp-resume-btn {
-        margin-top: 1rem;
-        background: #0FC0ED;
-        color: #ffffff;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 24px;
-        cursor: pointer;
-        font-size: 1rem;
-  
-        &:hover {
-          background-color: #008fcc;
-        }
       }
     }
-  
-    .dobp-profile-box {
-      text-align: left;
-  
-      h3 {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-      .MuiStepper-root{
-        .Mui-active{
-            color:  #0FC0ED;
-          }
-          .MuiStepLabel-label{
-            h6{
-                color:  black;
-            }
-          }
-      }
-      .dobp-profile-desc {
-        font-size: 0.875rem;
-        color: #666666;
-        margin-bottom: 1.5rem;
-      }
-  
-      .dobp-steps {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.5rem;
-  
-        .dobp-step {
-          margin-bottom: 1rem;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          background-color: #f9fafc;
-          display: flex;
-          flex-direction: column;
 
-          
-         
-  
-          &.completed {
-            border-left: 4px solid  #0FC0ED;
-          }
-  
-          &.incomplete {
-            border-left: 4px solid #e4e4e4;
-          }
-  
-          .dobp-step-label {
-            font-weight: bold;
-            color: #333333;
-          }
-  
-          .dobp-step-desc {
-            font-size: 0.875rem;
-            color: #666666;
-          }
-        }
-      }
-  
-      .dobp-setup-btn {
-        background: #0FC0ED;
-        color: #ffffff;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 26px;
-        cursor: pointer;
-        font-size: 1rem;
-        width: 100%;
-        margin-top: 40px;
-        &:hover {
-          background-color: #008fcc;
-        }
+    .dobp-resume-btn {
+      margin-top: 1rem;
+      background: #0fc0ed;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 24px;
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: #008fcc;
       }
     }
   }
-  
+
+  .dobp-profile-box {
+    text-align: left;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .MuiStepper-root {
+      .Mui-active {
+        color: #0fc0ed;
+      }
+      .MuiStepLabel-label {
+        h6 {
+          color: black;
+        }
+      }
+    }
+    .dobp-profile-desc {
+      font-size: 0.875rem;
+      color: #666666;
+      margin-bottom: 1.5rem;
+    }
+
+    .dobp-steps {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+
+      .dobp-step {
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        background-color: #f9fafc;
+        display: flex;
+        flex-direction: column;
+
+        &.completed {
+          border-left: 4px solid #0fc0ed;
+        }
+
+        &.incomplete {
+          border-left: 4px solid #e4e4e4;
+        }
+
+        .dobp-step-label {
+          font-weight: bold;
+          color: #333333;
+        }
+
+        .dobp-step-desc {
+          font-size: 0.875rem;
+          color: #666666;
+        }
+      }
+    }
+
+    .dobp-setup-btn {
+      background: #0fc0ed;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 26px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 40px;
+      &:hover {
+        background-color: #008fcc;
+      }
+    }
+  }
+}

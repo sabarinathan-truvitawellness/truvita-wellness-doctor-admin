@@ -22,7 +22,7 @@ interface InputProps {
   variant?: "outlined" | "filled" | "standard";
   externalClassName?: string;
   error?: boolean;
-  value?: string;
+  value?: string | number;
 }
 
 export const Input: React.FC<InputProps> = ({

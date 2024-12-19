@@ -1,6 +1,7 @@
 import React from "react";
 import { Select } from "../../Atom";
 import { TimeSlotMaker } from "../../Molecules";
+import './createSlots.scss'
 
 export const CreateSlots = () => {
   return (

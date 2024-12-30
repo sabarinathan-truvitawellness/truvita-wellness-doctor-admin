@@ -29,7 +29,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-add ~/.ssh/id_rsa
-          ls -l ~/.ssh
+          ls -l ~/.ssh  # Debugging to check the key and permissions
 
       - name: Deploy using SCP
         run: |

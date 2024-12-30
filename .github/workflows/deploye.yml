@@ -1,29 +1,29 @@
 name: Deploy React App
-
+ 
 on:
   push:
     branches:
-      - main  # Change to your branch name if different
-
+      - main  # Trigger on pushes to the main branch
+ 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+ 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-
+ 
       - name: Install dependencies
         run: npm install
-
+ 
       - name: Build project
         run: npm run build
-
+ 
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -32,8 +32,8 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-          rm -rf D:/Application-fe-folders/doctor-panel-Truvitaewllness/*
-      mkdir -p D:/Application-fe-folders/doctor-panel-Truvitaewllness/
-      tar -czf build.tar.gz -C build .
-      scp build.tar.gz your-server-ip:D:/Application-fe-folders/doctor-panel-Truvitaewllness/
-      ssh 149.56.140.242 "cd D:/Application-fe-folders/doctor-panel-Truvitaewllness/ && tar -xzf build.tar.gz && rm build.tar.gz"
+            rm -rf /var/www/doctor-panel
+            mkdir -p /var/www/doctor-panel
+            tar -czf build.tar.gz -C build .
+            scp build.tar.gz ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/doctor-panel/
+            ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "cd /var/www/doctor-panel/ && tar -xzf build.tar.gz && rm build.tar.gz"

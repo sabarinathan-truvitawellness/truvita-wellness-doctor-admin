@@ -32,8 +32,8 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            rm -rfD:\Application-fe-folders\doctor-panel-Truvitaewllness/*
-            mkdir -p D:\Application-fe-folders\doctor-panel-Truvitaewllness/
+            rm -rfD:\Application-fe-folders\doctor-panel-Truvitaewllness\*
+            mkdir -p D:\Application-fe-folders\doctor-panel-Truvitaewllness\
             tar -czf build.tar.gz -C build .
-            scp build.tar.gz username@your-server:D:\Application-fe-folders\doctor-panel-Truvitaewllness//
-            ssh username@your-server "cd D:\Application-fe-folders\doctor-panel-Truvitaewllness/ && tar -xzf build.tar.gz && rm build.tar.gz"
+            scp build.tar.gz ubuntu@149.56.140.242:D:\Application-fe-folders\doctor-panel-Truvitaewllness\
+            ssh ubuntu@149.56.140.242 "cd D:\Application-fe-folders\doctor-panel-Truvitaewllness/ && tar -xzf build.tar.gz && rm build.tar.gz"

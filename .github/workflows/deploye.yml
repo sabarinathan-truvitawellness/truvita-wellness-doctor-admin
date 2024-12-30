@@ -1,39 +1,39 @@
-name: Deploy React App
+name: Deploy Project
  
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main
  
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
- 
+    container:
+      image: node:20
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
- 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 20
  
       - name: Install dependencies
-        run: npm install
+        run: npm ci
  
       - name: Build project
         run: npm run build
  
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            rm -rf /var/www/doctor-panel
-            mkdir -p /var/www/doctor-panel
-            tar -czf build.tar.gz -C build .
-            scp build.tar.gz ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/doctor-panel/
-            ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "cd /var/www/doctor-panel/ && tar -xzf build.tar.gz && rm build.tar.gz"
+      - name: Get SSH Key and set permissions
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+ 
+      - name: Deploy using SCP
+        run: |
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ./dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:~/node-app
+ 
+      - name: Restart Server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << EOF
+          # Add your server restart commands here
+          EOF

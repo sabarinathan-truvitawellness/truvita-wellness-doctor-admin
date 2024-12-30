@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-           rm -rf D:/Application-fe-folders/doctor-panel-Truvitaewllness/*
+          rm -rf D:/Application-fe-folders/doctor-panel-Truvitaewllness/*
       mkdir -p D:/Application-fe-folders/doctor-panel-Truvitaewllness/
       tar -czf build.tar.gz -C build .
       scp build.tar.gz your-server-ip:D:/Application-fe-folders/doctor-panel-Truvitaewllness/

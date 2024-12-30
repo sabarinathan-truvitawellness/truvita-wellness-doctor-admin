@@ -22,7 +22,7 @@ export const Profile = createApi({
   endpoints: (builder) => ({
     profileData: builder.query({
       query: (payload) => ({
-        url: `doctor/doctor_profile/${payload.userId}/`,
+        url: `doctor/doctor_profile/${payload}/`,
         method: "GET",
       }),
       providesTags: ["ProfileData"],

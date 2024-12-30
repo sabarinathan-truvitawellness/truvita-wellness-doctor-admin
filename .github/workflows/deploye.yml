@@ -1,0 +1,39 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch name if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            rm -rf /path/to/your-app/*
+            mkdir -p /path/to/your-app
+            tar -czf build.tar.gz -C build .
+            scp build.tar.gz username@your-server:/path/to/your-app/
+            ssh username@your-server "cd /path/to/your-app && tar -xzf build.tar.gz && rm build.tar.gz"

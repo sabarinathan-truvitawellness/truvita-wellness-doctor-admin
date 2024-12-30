@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import { WalletIcon, Notification, Logout } from "../../utils/common/svgIcons";
 import profileAvatar from "../../Assets/images/header/profile-image-avatar.png";
@@ -7,11 +7,33 @@ import { ProfileOverlay } from "../profileOverlay";
 import { NotificationOverlay } from "../notificationOverlay";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../routes";
+import { useProfileDataQuery } from "../../redux/services";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setUserData } from "../../redux/slices/auth";
+import { notification } from "antd";
+import { LocalStorageKeys } from "../../utils/common/constant";
 
 export const Header = () => {
   const [isProfileOverlayOpen, setIsProfileOverlayOpen] = useState(false);
+  const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
   const [isNotificationOverlayOpen, setIsNotificationOverlayOpen] =
     useState(false);
+    const dispatch = useDispatch();
+
+    const userId =  localStorage.getItem("userId")
+    //getting the data from, rtk query
+    const { data } = useProfileDataQuery(userId);
+    // const role = localStorage.getItem("role")
+
+    useEffect(() => {
+        if (data) {
+            // console.log("Profile Data:", data);
+            dispatch(setUserData({ userData: data }));
+        }
+    }, [data]);
+
+    const { userData } = useSelector((state: RootState) => state.auth);
+    console.log("headr",userData)
 
   const handleOpenProfileOverlay = () => {
     setIsProfileOverlayOpen(true);
@@ -28,6 +50,19 @@ export const Header = () => {
   const handleCloseNotificationOverlay = () => {
     setIsNotificationOverlayOpen(false);
   };
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalVisible(false);
+
+    notification.success({
+        message: "Logged Out",
+        description: "You have been successfully logged out.",
+        placement: "topRight",
+    });
+
+   localStorage.removeItem(LocalStorageKeys.authToken)
+    window.location.href = "/login"; // Replace with your login route
+};
 
   return (
     <div className="header-container">
@@ -50,7 +85,7 @@ export const Header = () => {
       <div className="header-container-wrapper">
         <div className="column-1">
           <div className="name-details">
-            <h2>Welcome, Steven!</h2>
+            <h2>Welcome, {`${userData.first_name} ${userData.last_name}`}</h2>
             <p>Doctor</p>
           </div>
           <div className="calendar-details">
@@ -96,9 +131,9 @@ export const Header = () => {
             className="profile-avatar-wrp"
             onClick={handleOpenProfileOverlay}
           >
-            <img src={profileAvatar} alt="profile pic" />
+            <img src={userData.profile_picture_url || profileAvatar} alt="profile pic" />
           </div>
-          <div className="logout-icon-wrp">
+          <div className="logout-icon-wrp" onClick={handleConfirmLogout}>
             <Logout />
           </div>
         </div>

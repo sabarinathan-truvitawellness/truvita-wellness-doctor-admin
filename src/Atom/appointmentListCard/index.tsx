@@ -23,6 +23,7 @@ interface InputProps {
   onViewDetails: () => void;
   consultation: string;
   location:string;
+  profilePicture:string
 }
 
 export const AppointmentListCard: React.FC<InputProps> = ({
@@ -33,6 +34,7 @@ export const AppointmentListCard: React.FC<InputProps> = ({
   toTime,
   consultation,
   onViewDetails,
+  profilePicture,
   location
 }) => {
   return (
@@ -41,7 +43,7 @@ export const AppointmentListCard: React.FC<InputProps> = ({
       <div className="apointment-warpper">
         <div className="list-col-2">
           <div className="col-2-wrapper">
-            <img src={doctorDummyImage} alt="Doctor" />
+            <img src={profilePicture || doctorDummyImage} alt="Doctor" />
             <div className="col-2-content">
               <h2>{doctorName}</h2>
               <p className="cp-1">

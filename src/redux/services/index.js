@@ -3,3 +3,4 @@ export * from './otpVerify';
 export * from './profile';
 export * from './stepperForm';
 export * from './doctorSlots';
+export * from './appointments';

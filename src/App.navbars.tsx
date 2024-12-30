@@ -1,4 +1,3 @@
-
 // import React, { ReactNode, useEffect, useState } from "react";
 // import { Header, NavBar } from "./Molecules";
 // import { useVerificationStatusQuery } from "./redux/services";
@@ -48,7 +47,10 @@
 // };
 import React, { ReactNode, useEffect, useState } from "react";
 import { Header, NavBar } from "./Molecules";
-import { useVerificationStatusQuery } from "./redux/services";
+import {
+  useProfileDataQuery,
+  useVerificationStatusQuery,
+} from "./redux/services";
 import { AppRoutes } from "./routes";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -63,7 +65,11 @@ export const AppNavBars: React.FC<AppNavBarsProps> = ({ children }) => {
 
   const { data: verificationStatus } = useVerificationStatusQuery(userId);
 
-  console.log("Verification Status:", verificationStatus?.percentage_completion);
+  console.log(
+    "Verification Status:",
+    verificationStatus?.percentage_completion
+  );
+
 
   useEffect(() => {
     if (verificationStatus) {
@@ -74,8 +80,6 @@ export const AppNavBars: React.FC<AppNavBarsProps> = ({ children }) => {
       }
     }
   }, [verificationStatus]);
-
-
 
   return (
     <div className="page-render-container">

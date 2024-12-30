@@ -1,92 +1,151 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Calender, CancelButton, Tick } from "../../utils/common/svgIcons";
 import "./patientRecord.scss";
-import dummyProfile from '../../Assets/images/header/profile-avatar-xxl.png'
+import dummyProfile from "../../Assets/images/header/profile-avatar-xxl.png";
+import { Modal, notification } from "antd";
+import dayjs from "dayjs";
+import {
+  useApproveAppointmentMutation,
+  useGetAppointmentRequestDataQuery,
+} from "../../redux/services";
+import dummyAvatar from "../../Assets/images/header/profile-image-avatar.png";
 
-type PatientRequest = {
-  date: string;
-  day: string;
-  imageUrl: string;
-  patientUrl: string;
-  age: string;
+interface PatientDetails {
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
   gender: string;
-  link: string;
-  name: string;
-};
+  country: string;
+}
+
+interface TimeSlotDetails {
+  from_date: string;
+  start_time: string;
+  end_time: string;
+}
+
+interface AppointmentRequestData {
+  appointment_id: string;
+  profile_picture_url?: string;
+  patient_details: PatientDetails;
+  location: string;
+  symptoms: string;
+  placeOfVisit: string;
+  time_slot_details: TimeSlotDetails;
+}
 
 export const PatientsRecord: React.FC = () => {
-  const patientsRequest: PatientRequest[] = [
-    {
-      date: "27",
-      day: "Mon",
-      imageUrl: dummyProfile,
-      patientUrl: "/patient/1",
-      age: "32",
-      gender: "M",
-      link: "/details/1",
-      name: "John Doe",
-    },
-    {
-      name: "Jane Smith",
-      date: "28",
-      day: "Tue",
-      imageUrl: dummyProfile,
-      patientUrl: "/patient/2",
-      age: "29",
-      gender: "F",
-      link: "/details/2",
-    },
-  ];
+  const doctorId = localStorage.getItem("userId") || "";
+  const [requestList, setRequestList] = useState<AppointmentRequestData[]>([]);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<
+    string | null
+  >(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const { data: getAppointmentRequest, refetch } =
+    useGetAppointmentRequestDataQuery({
+      doctorId,
+      status: "pending",
+    });
+  const [approveAppointment] = useApproveAppointmentMutation();
+
+  const calculateAge = (birthDate: string): number => {
+    const today = dayjs();
+    const birthDay = dayjs(birthDate);
+    return today.diff(birthDay, "year");
+  };
+
+  useEffect(() => {
+    if (getAppointmentRequest) {
+      setRequestList(getAppointmentRequest);
+    }
+  }, [getAppointmentRequest]);
+
+  const showModal = (appId: string) => {
+    setSelectedAppointmentId(appId);
+    setIsModalVisible(true);
+  };
+
+  const handleApprove = async () => {
+    if (!selectedAppointmentId) return;
+    try {
+      await approveAppointment(selectedAppointmentId);
+      notification.success({
+        message: "Success",
+        description: "Appointment successfully approved!",
+      });
+      refetch(); // Fetch the updated list
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: "Failed to approve the appointment.",
+      });
+    } finally {
+      setIsModalVisible(false);
+      setSelectedAppointmentId(null);
+    }
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setSelectedAppointmentId(null);
+  };
 
   return (
     <div className="patient-recor-super-container">
-    <div className="patients-record-container">
-      <h2 className="pr-title">Patient Requests</h2>
-      <div className="patients-record-wrapper">
-        {patientsRequest.map((res, index) => (
+      <div className="patients-record-container">
+        <h2 className="pr-title">Patient Requests</h2>
+        <div className="patients-record-wrapper">
+          {requestList.map((data, index) => (
           <div className="pr-short-card-container" key={index}>
             <div className="pr-short-card-wrapper">
             
               <div className="flex">
               <img
-                src={res.imageUrl}
-                alt={`${res.name}'s profile`}
+                 src={data.profile_picture_url || dummyAvatar}
+                // alt={`${data.user}'s profile`}
                 className="patient-image"
               />
               <div className="patient-info">
-                <h3>{res.name || "Unknown Patient"}</h3>
-                <p>{`${res.age || "N/A"} | ${res.gender || "N/A"}`}</p>
+                <h3>{`${data.patient_details.first_name} ${data.patient_details.last_name}`}</h3>
+                <p> {calculateAge(data.patient_details.date_of_birth)} yrs,{" "}
+                {data?.patient_details.gender}</p>
               </div>
               </div>
 
               <div className="pr-symtom-check">
-                <p>Symptom Check</p>
+              <p>Symptoms</p>
+              <p>{data.symptoms}</p>
               </div>
               <div className="pr-time">
-                <p>02:40 - 03:00</p>
+              <p>Preferred Time</p>
+              <p>
+                {`${data.time_slot_details.start_time} - ${data.time_slot_details.end_time}`}
+              </p>
               </div>
               <div className="pr-date">
-                <p>11/12/2024</p>
+              <p>Preferred Date</p>
+              <p>{data.time_slot_details.from_date}</p>
               </div>
               <div className="btn-section">
                 <button
                   className="action-btn calender-btn"
                   title="Schedule"
-                  onClick={() => console.log("Calendar clicked for", res.name)}
+                  onClick={() => console.log("Calendar clicked for")}
                 >
                   <Calender />
                 </button>
                 <button
                   className="action-btn cancel-btn"
                   title="Reject"
-                  onClick={() => console.log("Rejected", res.name)}
+                  onClick={() => console.log("Rejected")}
                 >
                   <CancelButton />
                 </button>
                 <button
                   className="action-btn tick-btn"
                   title="Accept"
-                  onClick={() => console.log("Accepted", res.name)}
+                  onClick={() => showModal(data.appointment_id)}
                 >
                   <Tick />
                 </button>
@@ -94,8 +153,19 @@ export const PatientsRecord: React.FC = () => {
             </div>
           </div>
         ))}
+        </div>
       </div>
-    </div>
+
+      <Modal
+        title="Approve Appointment"
+        visible={isModalVisible}
+        onOk={handleApprove}
+        onCancel={handleCancel}
+        okText="Confirm"
+        cancelText="Cancel"
+      >
+        <p>Are you sure you want to approve this appointment?</p>
+      </Modal>
     </div>
   );
 };

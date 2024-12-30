@@ -14,7 +14,7 @@ export const DoctorSlot = createApi({
       return headers;
     },
   }),
-  tagTypes: ["CreateSlot"], // Ensure tagTypes include "CreateSlot"
+  tagTypes: ["CreateSlot"],
   endpoints: (builder) => ({
     createSlot: builder.mutation({
       query: (payload) => ({
@@ -27,8 +27,33 @@ export const DoctorSlot = createApi({
       }),
       invalidatesTags: ["CreateSlot"], // Use `invalidatesTags` to signal cache invalidation
     }),
+    getSlotData: builder.query({
+      query: (payload) => ({
+        url: `doctor/availability/${payload}/`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    }),
+
+    editSlot: builder.mutation({
+      query: (payload) => ({
+        url: `doctor/availability/${payload.userId}/`,
+        method: "PATCH",
+        body: payload.slotData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["CreateSlot"],
+    }),
   }),
 });
 
 // Export the mutation hook
-export const { useCreateSlotMutation } = DoctorSlot;
+export const {
+  useCreateSlotMutation,
+  useGetSlotDataQuery,
+  useEditSlotMutation,
+} = DoctorSlot;

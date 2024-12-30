@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./doctorOnBoardingProgress.scss";
 import brandLogo from "../../Assets/images/home/truvita-logo.png";
-import {Box,Typography,Button,Stepper,Step,StepLabel,StepContent,Paper,CircularProgress,} from "@mui/material";
-import {CheckBox,DynamicDateField,DynamicPhoneNumber,Input,ModelOverlay,Select,TextBox} from "../../Atom";
+import {
+  Box,
+  Typography,
+  Button,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Paper,
+  CircularProgress,
+} from "@mui/material";
+import {
+  CheckBox,
+  DynamicDateField,
+  DynamicPhoneNumber,
+  Input,
+  ModelOverlay,
+  Select,
+  TextBox,
+} from "../../Atom";
 import moment from "moment-timezone";
-import {credentials,Gender_Data,specialtyData,usStates,} from "../../utils/common/constant";
-import { useNavigate } from "react-router-dom";
+import {
+  credentials,
+  Gender_Data,
+  specialtyData,
+  usStates,
+} from "../../utils/common/constant";
+import { Navigate, useNavigate } from "react-router-dom";
 import ISO6391 from "iso-639-1";
 import dayjs from "dayjs";
 import { notification } from "antd";
@@ -19,7 +42,7 @@ import {
   verificationForm,
   useVerificationStatusQuery,
 } from "../../redux/services";
-
+import { AppRoutes } from "../../routes";
 
 type TimeZoneOption = {
   label: string;
@@ -71,29 +94,25 @@ export const DoctorOnboardingProgress = () => {
   const { data: verificationStatus } = useVerificationStatusQuery(userId);
 
   const [isCentPercent, setIsCentPercent] = useState<boolean | null>(null);
-  const [formCompletionStatus, setFormCompletionStatus] = useState<FormCompletionStatus>({
-    doctorsDetail: false,
-    personalInfo: false,
-    serviceDetails: false,
-  });
-
-  useEffect(()=>{
+  const [formCompletionStatus, setFormCompletionStatus] =
+    useState<FormCompletionStatus>({
+      doctorsDetail: false,
+      personalInfo: false,
+      serviceDetails: false,
+    });
+  const navigate = useNavigate();
+  useEffect(() => {
     setFormCompletionStatus({
-      doctorsDetail:verificationStatus?.profile_completion.doctor_details_completed,
-      personalInfo:verificationStatus?.profile_completion.personal_info_completed,
-      serviceDetails:verificationStatus?.profile_completion.service_details_completed
-    })
-  },[verificationStatus])
-
- 
+      doctorsDetail:
+        verificationStatus?.profile_completion.doctor_details_completed,
+      personalInfo:
+        verificationStatus?.profile_completion.personal_info_completed,
+      serviceDetails:
+        verificationStatus?.profile_completion.service_details_completed,
+    });
+  }, [verificationStatus, activeStep,isFormOpen]);
 
   console.log("Verification Status:", verificationStatus?.profile_completion);
-
-  // Debug log for fetched data
-  // console.log(
-  //   "Verification Stepper Form Data 3:",
-  //   VerificationStepperFormThree
-  // );
 
   // Initial state for formData
   const [formData, setFormData] = useState({
@@ -116,6 +135,7 @@ export const DoctorOnboardingProgress = () => {
       language: "",
       smsNotification: false,
       emailNotification: false,
+      experience: "",
     },
     stepThree: {
       aiBoothConsultation: false,
@@ -126,6 +146,8 @@ export const DoctorOnboardingProgress = () => {
       docotorConsultpriceRangeMax: 500,
     },
   });
+
+  console.log("fgfffffffffff", formData.stepThree);
 
   // Update formData when VerificationStepperForm is fetched or updated
   useEffect(() => {
@@ -156,21 +178,26 @@ export const DoctorOnboardingProgress = () => {
             VerificationStepperFormTwo?.doctor_data.sms_notification,
           emailNotification:
             VerificationStepperFormTwo?.doctor_data.email_notification,
+          experience:
+            VerificationStepperFormTwo?.doctor_data.experience_start_date,
         },
         stepThree: {
-          aiBoothConsultation:
-            VerificationStepperFormThree?.services.aiBoothConsultation,
-          doctorConsultation:
-            VerificationStepperFormThree?.services.doctorConsultation,
-          aiBoothpriceRangeMin:
-            VerificationStepperFormThree?.services.aiBoothpriceRangeMin,
-          aiBoothpriceRangeMax:
-            VerificationStepperFormThree?.services.aiBoothpriceRangeMax,
-          docotorConsultpriceRangeMin:
-            VerificationStepperFormThree?.services.doctorConsultpriceRangeMin,
-          docotorConsultpriceRangeMax:
-            VerificationStepperFormThree?.services.doctorConsultpriceRangeMax,
+          aiBoothConsultation: VerificationStepperFormThree?.services.aiBoothConsultation,
+          aiBoothpriceRangeMin: Number(
+            VerificationStepperFormThree?.services.aiBoothpriceRangeMin
+          ),
+          aiBoothpriceRangeMax: Number(
+            VerificationStepperFormThree?.services.aiBoothpriceRangeMax
+          ),
+          doctorConsultation: VerificationStepperFormThree?.services.doctorConsultConsultation,
+          docotorConsultpriceRangeMin: Number(
+            VerificationStepperFormThree?.services.doctorConsultpriceRangeMin
+          ),
+          docotorConsultpriceRangeMax: Number(
+            VerificationStepperFormThree?.services.doctorConsultpriceRangeMax
+          ),
         },
+        
       });
     }
   }, [
@@ -178,8 +205,6 @@ export const DoctorOnboardingProgress = () => {
     VerificationStepperFormTwo,
     VerificationStepperFormThree,
   ]);
-
-  
 
   const [error, setError] = useState({
     stepOne: {
@@ -209,8 +234,6 @@ export const DoctorOnboardingProgress = () => {
     }));
   };
 
-
-
   const saveChangeHandlerFormOne = async (step: number) => {
     try {
       if (step === 0) {
@@ -222,23 +245,22 @@ export const DoctorOnboardingProgress = () => {
             timezone: formData.stepOne.timeZone,
           },
         };
-  
+
         // Ensure the API function returns a promise
-        console.log('Sending Step One data...');
+        console.log("Sending Step One data...");
         const response = await verificationStepperOnePost(payloadData);
-        console.log('Step One response:', response);
-  
+        console.log("Step One response:", response);
+
         // Check if response is valid before showing notification
         if (!response.error) {
-
           notification.success({
-            message: 'Step One Saved',
-            description: 'Your Step One data has been saved successfully!',
+            message: "Step One Saved",
+            description: "Your Step One data has been saved successfully!",
           });
         } else {
           notification.error({
-            message: 'Error',
-            description: 'There was an issue with Step One data.',
+            message: "Error",
+            description: "There was an issue with Step One data.",
           });
         }
       } else if (step === 1) {
@@ -257,22 +279,23 @@ export const DoctorOnboardingProgress = () => {
             sms_notification: formData.stepTwo.smsNotification,
             specialty: formData.stepTwo.specialty,
             license_state: formData.stepTwo.state,
+            experience_start_date: formData.stepTwo.experience,
           },
         };
-  
-        console.log('Sending Step Two data...');
+
+        console.log("Sending Step Two data...");
         const response = await verificationStepperTwoPost(payloadData);
-        console.log('Step Two response:', response);
-  
+        console.log("Step Two response:", response);
+
         if (!response.error) {
           notification.success({
-            message: 'Step Two Saved',
-            description: 'Your Step Two data has been saved successfully!',
+            message: "Step Two Saved",
+            description: "Your Step Two data has been saved successfully!",
           });
         } else {
           notification.error({
-            message: 'Error',
-            description: 'There was an issue with Step Two data.',
+            message: "Error",
+            description: "There was an issue with Step Two data.",
           });
         }
       } else if (step === 2) {
@@ -282,80 +305,85 @@ export const DoctorOnboardingProgress = () => {
             services: {
               aiBoothConsultation: formData.stepThree.aiBoothConsultation,
               doctorConsultation: formData.stepThree.doctorConsultation,
-              aiBoothpriceRangeMin: formData.stepThree.aiBoothpriceRangeMin,
-              aiBoothpriceRangeMax: formData.stepThree.docotorConsultpriceRangeMax,
-              doctorConsultpriceRangeMin: formData.stepThree.docotorConsultpriceRangeMin,
-              doctorConsultpriceRangeMax: formData.stepThree.docotorConsultpriceRangeMax,
+              aiBoothConsultationpriceRangeMin: Number(formData.stepThree.aiBoothpriceRangeMin) , // Convert to number
+              aiBoothConsultationpriceRangeMax: Number(formData.stepThree.aiBoothpriceRangeMax) , // Convert to number
+              doctorConsultationpriceRangeMin: Number(formData.stepThree.docotorConsultpriceRangeMin) , // Convert to number
+              doctorConsultationpriceRangeMax: Number(formData.stepThree.docotorConsultpriceRangeMax) , // Convert to number
             },
+            
           },
         };
-  
-        console.log('Sending Step Three data...');
+
+        console.log("Sending Step Three data...");
         const response = await verificationStepperThreePost(payloadData);
-        console.log('Step Three response:', response);
-  
+        console.log("Step Three response:", response);
+
         if (!response.error) {
           notification.success({
-            message: 'Step Three Saved',
-            description: 'Your Step Three data has been saved successfully!',
+            message: "Step Three Saved",
+            description: "Your Step Three data has been saved successfully!",
           });
-
         } else {
           notification.error({
-            message: 'Error',
-            description: 'There was an issue with Step Three data.',
+            message: "Error",
+            description: "There was an issue with Step Three data.",
           });
         }
       }
     } catch (err) {
-      console.error('Error in saveChangeHandlerFormOne:', err);
-  
+      console.error("Error in saveChangeHandlerFormOne:", err);
+
       // Show generic error notification if the try block fails
       notification.error({
-        message: 'Error',
-        description: 'There was an error processing your request.',
+        message: "Error",
+        description: "There was an error processing your request.",
       });
     }
   };
-  
+
   const openIndexForm = () => {
     setIsFormOpen(false);
   };
 
-
-  console.log("activeStep",activeStep)
+  console.log("activeStep", activeStep);
 
   const handleNext = (currentIndex: number) => {
+
+    if(verificationStatus?.percentage_completion === 100 && activeStep === 2){
+      navigate(AppRoutes.doctorVerificationLanding)
+    } 
     const stepKeys: (keyof FormCompletionStatus)[] = [
       "personalInfo",
       "doctorsDetail",
       "serviceDetails",
     ];
-  
+
     const currentStepKey = stepKeys[currentIndex];
-  
     // Check if the current step is completed
     if (!formCompletionStatus[currentStepKey]) {
       console.error(`Cannot proceed: "${currentStepKey}" is not completed.`);
-      
+
       // Open the form for the current step if it is not completed
       setIsFormOpen(true);
-  
+
       // Optionally show a notification if the step isn't completed
       notification.error({
         message: "Incomplete Step",
         description: `Please complete the "${steps[currentIndex].label}" step before proceeding.`,
       });
-  
+
       return; // Prevent proceeding to the next step if the current step isn't completed
     }
-    setIsFormOpen(true);  // Open the form for the next step
+    setIsFormOpen(true); // Open the form for the next step
     // Proceed to the next step if the current step is completed
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
- 
+    if(activeStep === steps.length ){
+      return
+    }
+    else{
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+    
   };
-  
-  
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -366,7 +394,6 @@ export const DoctorOnboardingProgress = () => {
   };
 
   const maxSteps = steps.length;
- 
 
   useEffect(() => {
     // Fetch time zones for the United States
@@ -386,6 +413,9 @@ export const DoctorOnboardingProgress = () => {
     "Services and Costing",
   ];
 
+  const editFirstForm = () => {
+    setIsFormOpen(true);
+  };
   // console.log("is form open",isFormOpen)
 
   return (
@@ -404,7 +434,7 @@ export const DoctorOnboardingProgress = () => {
               <p>Edit Info</p>
 
               <div className="form-stepper-section">
-                <Stepper activeStep={activeStep-1} alternativeLabel>
+                <Stepper activeStep={activeStep} alternativeLabel>
                   {horizontalSteps.map((label) => (
                     <Step key={label}>
                       <StepLabel>{label}</StepLabel>
@@ -488,7 +518,7 @@ export const DoctorOnboardingProgress = () => {
                 /* Form two */
                 <div className="form-container-2">
                   <div className="form-container-2-wrapper">
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper ">
                       <Input
                         type="text"
                         placeholder="First Name"
@@ -502,7 +532,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper ">
                       <Input
                         type="text"
                         placeholder="Last Name"
@@ -534,7 +564,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <Select
                         label={"Select Specialty"}
                         options={specialtyData}
@@ -542,6 +572,7 @@ export const DoctorOnboardingProgress = () => {
                         name={"specialty"}
                         value={formData.stepTwo["specialty"] || ""}
                         helperText={""}
+                        // externalClassName=""
                       />
                     </div>
 
@@ -555,6 +586,34 @@ export const DoctorOnboardingProgress = () => {
                     </div>
 
                     <div className="global-input-wrapper">
+                      {/* <Input
+                        type="text"
+                        placeholder="Enter Your Experince"
+                        name="experience"
+                        label="Experience"
+                        externalClassName="internal-input-lastname"
+                        variant="outlined"
+                        value={formData.stepTwo["experience"] || ""}
+                        onChange={changeHandler}
+                      /> */}
+                      <DynamicDateField
+                        type="date"
+                        onChange={changeHandler}
+                        name="experience"
+                        label="Practice Start Date"
+                        externalClassName="internal-input-dob"
+                        required={true}
+                        variant="outlined"
+                        isShrunk={true}
+                        value={
+                          formData.stepTwo["experience"]
+                            ? dayjs(formData.stepTwo["experience"])
+                            : null
+                        }
+                      />
+                    </div>
+
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <Select
                         label={"Gender"}
                         value={formData.stepTwo["gender"] || ""}
@@ -567,7 +626,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper ">
                       <Input
                         type="text"
                         placeholder="Enter NPI Number"
@@ -580,7 +639,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <Select
                         label="States"
                         options={usStates}
@@ -591,7 +650,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <Select
                         label="Credentials"
                         value={formData.stepTwo["credentials"] || ""}
@@ -602,7 +661,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <Select
                         label="Language"
                         value={formData.stepTwo["language"] || ""}
@@ -613,7 +672,7 @@ export const DoctorOnboardingProgress = () => {
                       />
                     </div>
 
-                    <div className="global-input-wrapper">
+                    <div className="global-input-wrapper mt-[16px] mb-[8px]">
                       <div className="checkbox-wrapper flex top-0">
                         <div className="check-box">
                           <CheckBox
@@ -663,27 +722,27 @@ export const DoctorOnboardingProgress = () => {
                     </div>
                     <div className="global-input-wrapper">
                       <Input
-                        type="text"
+                        type="number"
                         placeholder="0"
                         name="docotorConsultpriceRangeMin"
                         label="Min"
                         externalClassName="internal-input-lastname"
                         variant="outlined"
                         value={
-                          formData.stepThree["docotorConsultpriceRangeMin"]
+                          formData.stepThree["docotorConsultpriceRangeMin"] || ""
                         }
                         onChange={changeHandler}
                       />
 
                       <Input
-                        type="text"
+                        type="number"
                         placeholder="500"
                         name="docotorConsultpriceRangeMax"
                         label="Max"
                         externalClassName="internal-input-lastname"
                         variant="outlined"
                         value={
-                          formData.stepThree["docotorConsultpriceRangeMax"]
+                          formData.stepThree["docotorConsultpriceRangeMax"] || ""
                         }
                         onChange={changeHandler}
                       />
@@ -705,19 +764,21 @@ export const DoctorOnboardingProgress = () => {
                         label="Min"
                         externalClassName="internal-input-lastname"
                         variant="outlined"
-                        value={formData.stepThree["aiBoothpriceRangeMin"]}
+                        value={formData.stepThree["aiBoothpriceRangeMin"] || ""}
                         onChange={changeHandler}
                       />
+
                       <Input
-                        type="text"
+                        type="number"
                         placeholder="500"
-                        name="aiBoothpriceRangemax"
+                        name="aiBoothpriceRangeMax"
                         label="Max"
                         externalClassName="internal-input-lastname"
                         variant="outlined"
-                        value={formData.stepThree["aiBoothpriceRangeMax"]}
+                        value={formData.stepThree["aiBoothpriceRangeMax"] || ""}
                         onChange={changeHandler}
                       />
+                     
                     </div>
                   </div>
                   <div className="button-wrapper">
@@ -736,61 +797,59 @@ export const DoctorOnboardingProgress = () => {
         <div className="dobp-wrapper">
           {/* Left Column */}
           <div className="dobp-col-1">
-          <div className="profile-setup-container">
-      <Typography variant="h6" className="profile-title">
-        Set Up your Profile and start connecting with your patients
-      </Typography>
+            <div className="profile-setup-container">
+              <Typography variant="h6" className="profile-title">
+                Set Up your Profile and start connecting with your patients
+              </Typography>
 
-      <Box className="progress-container">
-        <Box >
-      
-          {/* Progress CircularProgress */}
-          <CircularProgress
-            variant="determinate"
-            value={verificationStatus?.percentage_completion}
-            className="progress-foreground"
-            size={160}
-            thickness={4}
-            color= 'primary'
-          />
-          {/* Centered Content */}
-          <Box
-            position="absolute"
-            top="50%"
-            left="50%"
-            sx={{
-              transform: "translate(-50%, -50%)",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="div"
-              className="progress-percentage"
-            >
-              {verificationStatus?.percentage_completion}%
-            </Typography>
-            <Typography
-              variant="caption"
-              display="block"
-              className="progress-subtext"
-            >
-              You're Almost there!
-            </Typography>
-          </Box>
-        </Box>
-        
-      </Box>
+              <Box className="progress-container">
+                <Box>
+                  {/* Progress CircularProgress */}
+                  <CircularProgress
+                    variant="determinate"
+                    value={verificationStatus?.percentage_completion}
+                    className="progress-foreground"
+                    size={160}
+                    thickness={4}
+                    color="primary"
+                  />
+                  {/* Centered Content */}
+                  <Box
+                    position="absolute"
+                    top="50%"
+                    left="50%"
+                    sx={{
+                      transform: "translate(-50%, -50%)",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      className="progress-percentage"
+                    >
+                      {verificationStatus?.percentage_completion}%
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      className="progress-subtext"
+                    >
+                      You're Almost there!
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
 
-      <Typography variant="body2" className="profile-description">
-        You're just a few steps away from unlocking full access to patient
-        bookings and enhancing your credibility.
-      </Typography>
+              <Typography variant="body2" className="profile-description">
+                You're just a few steps away from unlocking full access to
+                patient bookings and enhancing your credibility.
+              </Typography>
 
-      <Button variant="contained" className="resume-button">
-        ▶ Resume
-      </Button>
-    </div>
+              <Button variant="contained" className="resume-button">
+                ▶ Resume
+              </Button>
+            </div>
           </div>
 
           {/* Right Column */}
@@ -828,6 +887,22 @@ export const DoctorOnboardingProgress = () => {
                         >
                           {index === steps.length - 1 ? "Finish" : "Continue"}
                         </Button>
+                        {
+                          <Button
+                            onClick={editFirstForm}
+                            sx={{ mt: 1, mr: 1 }}
+                            disabled={
+                              (!formCompletionStatus.doctorsDetail &&
+                                index === 0) ||
+                              (!formCompletionStatus.personalInfo &&
+                                index === 1) ||
+                              (!formCompletionStatus.serviceDetails &&
+                                index === 2)
+                            }
+                          >
+                            Edit
+                          </Button>
+                        }
                         <Button
                           disabled={index === 0}
                           onClick={handleBack}

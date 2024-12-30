@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import profileAvatar from "../../../Assets/images/header/dummy-doctor-profile-2.png";
-import { Editpen, PatientsAttended, Stethescope, TotalAppointment } from "../../../utils/common/svgIcons";
-import './profile.scss';
+import {
+  Editpen,
+  PatientsAttended,
+  Stethescope,
+  TotalAppointment,
+} from "../../../utils/common/svgIcons";
+import "./profile.scss";
 import { useProfileDataQuery } from "../../../redux/services/profile";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/slices/auth";
+import dayjs from "dayjs";
 
 export const ProfileSetting = () => {
-  const { data, error, isLoading } = useProfileDataQuery({ userId: 23 });
-  console.log(data)
+  const { userData } = useSelector((state: RootState) => state.auth);
+
   const editInfo = () => {};
+
+  const calculateAge = (birthDate: string) => {
+    const today = dayjs();
+    const birthDay = dayjs(birthDate);
+    return today.diff(birthDay, "year");
+  };
 
   const cardData = [
     {
@@ -17,7 +30,7 @@ export const ProfileSetting = () => {
       detailedAmt: "247",
     },
     {
-      cardIcon: <PatientsAttended/>,
+      cardIcon: <PatientsAttended />,
       cardTitle: "Patients Attended",
       detailedAmt: "198",
     },
@@ -29,22 +42,27 @@ export const ProfileSetting = () => {
         <div className="colum-one">
           <div className="profile-row">
             <div className="img-section">
-              <img src={profileAvatar}></img>
-              <div className="img-edit"><Editpen /></div>
+              <img src={userData.profile_picture_url}></img>
+              <div className="img-edit">
+                <Editpen />
+              </div>
             </div>
             <div className="profile-info-content">
-              <h2>Steven Gerald</h2>
-              <p>21, Male</p>
+              <h2>{`${userData?.first_name} ${userData.last_name}`}</h2>
+              <p>{`${calculateAge(userData.date_of_birth)}
+              ${
+                userData.gender
+              }`}</p>
               <p>Doctor</p>
             </div>
             <div className="profile-doctor-experience">
               <div className="experience-card-wrapper">
                 <div className="icon-wrapper">
-                  <Stethescope/>
+                  <Stethescope />
                 </div>
                 <div className="experience-contents">
                   <p>Primary Care</p>
-                  <p>12 Years  Experience</p>
+                  <p>12 Years Experience</p>
                   <p>Medicore Clinic</p>
                 </div>
               </div>
@@ -63,34 +81,31 @@ export const ProfileSetting = () => {
             <div className="info-wrapper">
               <div className="info-content">
                 <h3>First Name</h3>
-                <p>Steven</p>
+                <p>{userData?.first_name}</p>
               </div>
 
               <div className="info-content">
                 <h3>Last Name</h3>
-                <p>Gerald</p>
+                <p>{userData.last_name}</p>
               </div>
             </div>
             <div className="info-wrapper">
               <div className="info-content">
                 <h3>Email</h3>
-                <p>stephen@gamil.com</p>
+                <p>{userData?.email}</p>
               </div>
 
               <div className="info-content">
                 <h3>Phone</h3>
-                <p>+31 345 346 46</p>
+                <p>{userData?.phone_number}</p>
               </div>
             </div>
             <div className="info-wrapper">
-              <div className="info-content">
-                {/* <h3>Blood Group</h3>
-                <p>o+</p> */}
-              </div>
+             
 
               <div className="info-content">
                 <h3>Gender</h3>
-                <p>Male</p>
+                <p>{userData.gender}</p>
               </div>
             </div>
           </div>
@@ -104,7 +119,7 @@ export const ProfileSetting = () => {
               </div>
             </div>
 
-            <div className="info-wrapper">
+            {/* <div className="info-wrapper">
               <div className="info-content">
                 <h3>Country</h3>
                 <p>United States</p>
@@ -114,17 +129,17 @@ export const ProfileSetting = () => {
                 <h3>City/Sate</h3>
                 <p>Leeds, East London</p>
               </div>
-            </div>
-            <div className="info-wrapper">
+            </div> */}
+            {/* <div className="info-wrapper">
               <div className="info-content">
                 <h3>Postal Code</h3>
                 <p>ERT 2356</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="colum-two">
-        <div className="doctor-profile-cards-container">
+          <div className="doctor-profile-cards-container">
             {cardData.map((res) => {
               return (
                 <div className="doctor-profile-card-wrapper">
@@ -146,7 +161,3 @@ export const ProfileSetting = () => {
     </div>
   );
 };
-
-
-
-

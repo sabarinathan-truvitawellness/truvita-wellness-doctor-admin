@@ -9,6 +9,7 @@ import {
 } from "../../Molecules";
 
 export const Home = () => {
+  
   return (
     <div className="page-render-container">
       <div className="container-wrapper flex">

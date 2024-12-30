@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { AuthAPI,DoctorSlot,OtpVerify, Profile, verificationForm } from "./services";
+import { AppointmentApi, AuthAPI,DoctorSlot,OtpVerify, Profile, verificationForm } from "./services";
 import React from "react";
 import {authReducer,otpSlice} from './slices';
 
@@ -12,8 +12,9 @@ const ReduxStore = configureStore({
         [Profile.reducerPath]: Profile.reducer,
         [verificationForm.reducerPath] : verificationForm.reducer,
         [DoctorSlot.reducerPath]: DoctorSlot.reducer,
+        [AppointmentApi.reducerPath] : AppointmentApi.reducer,
         auth: authReducer,
-        otp: otpSlice
+        otp: otpSlice,
     },
     middleware:(getDefaultMiddleware) => 
         getDefaultMiddleware().concat(
@@ -21,7 +22,8 @@ const ReduxStore = configureStore({
             OtpVerify.middleware,
             Profile.middleware,
             verificationForm.middleware,
-            DoctorSlot.middleware
+            DoctorSlot.middleware,
+            AppointmentApi.middleware
         )
 });
 
